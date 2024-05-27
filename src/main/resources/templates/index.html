@@ -1,10 +1,290 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="UTF-8">
-		<title>Home</title>
-	</head>
-	<body>
-		<h1>Página principal</h1>
-	</body>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+	<title>Facultad de Ciencias Agrarias</title>
+</head>
+
+<body>
+	<header
+		class="d-flex flex-wrap justify-content-center align-items-center py-3 mb-0 border-bottom h-25 text-bg-secondary"
+		id="header">
+		<div class="container-fluid text-center">
+			<div class="row align-items-center">
+				<div class="col d-flex justify-content-center">
+					<img src="images/LOGO_FCA_2020.redimensionado.png" height="120px">
+				</div>
+				<div class="col d-flex justify-content-center">
+					<h1 class="text-uppercase fs-2">Facultad de Ciencias Agrarias</h1>
+				</div>
+				<div class="col d-flex justify-content-center">
+					<span class="fs-5 block fw-medium">Universidad Nacional de Jujuy</span>
+				</div>
+			</div>
+		</div>
+	</header>
+
+
+	<div class="container-fluid mt-0  bg-dark ">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<div class="container-fluid justify-content-around">
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse d-flex justify-content-center">
+					<ul class="navbar-nav nav-fill justify-content-around gap-4">
+						<li class="nav-item">
+							<a class="nav-link text-white" href="#">INICIO</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle text-white" href="#" role="button"
+								data-bs-toggle="dropdown" aria-expanded="false">
+								INSTITUCIONAL
+							</a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="https://www.fca.unju.edu.ar/institucional/">AUTORIDADES</a></li>
+								<li><a class="dropdown-item" href="https://www.fca.unju.edu.ar/institucional/consejo-academico/">CONSEJO ACADÉMICO</a></li>
+								<li><a class="dropdown-item" href="https://www.fca.unju.edu.ar/institucional/historia/">HISTORIA</a></li>
+								<li><a class="dropdown-item" href="https://www.fca.unju.edu.ar/institucional/expansiones/">EXPANSIONES ACADÉMICAS</a></li>
+							</ul>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle text-white" href="#" role="button"
+								data-bs-toggle="dropdown" aria-expanded="false">
+								OFERTA ACADÉMICA
+							</a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="https://www.fca.unju.edu.ar/oferta-academica/pregrado/">PREGRADO</a></li>
+								<li><a class="dropdown-item" href="https://www.fca.unju.edu.ar/oferta-academica/grado/">GRADO</a></li>
+								<li><a class="dropdown-item" href="https://www.fca.unju.edu.ar/oferta-academica/posgrado/">POSTGRADO</a></li>
+								<li><a class="dropdown-item" href="https://www.fca.unju.edu.ar/investigacion/cursos/">CURSOS DE CIENCIA Y TECNICA Y POSTGRADO</a></li>
+							</ul>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle text-white" href="#" role="button"
+								data-bs-toggle="dropdown" aria-expanded="false">ESTUDIANTES</a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="https://www.fca.unju.edu.ar/estudiantes/">LINKS DE INTERÉS</a></li>
+								<li><a class="dropdown-item" href="https://becas.unju.edu.ar/">BECAS</a></li>
+								<li><a class="dropdown-item" href="https://www.fca.unju.edu.ar/estudiantes/concurso/">CONCURSOS</a></li>
+								<li><a class="dropdown-item" href="https://www.fca.unju.edu.ar/estudiantes/mesas_examen/">MESAS DE EXAMEN</a></li>
+								<li><a class="dropdown-item" href="https://www.fca.unju.edu.ar/estudiantes/tutorias/">TUTORIAS</a></li>
+							</ul>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-white" href="https://www.fca.unju.edu.ar/ingresantes/" target="_blank">INGRESO</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+
+	<div id="container-main-aside" class="d-flex w-10 p-5 border m-auto">
+		<main>
+			<div class="container-sm mt-5">
+				<div class="d-flex justify-content-center">
+					<div id="carouselExampleFade" class="carousel slide carousel-fade w-75">
+						<div class="carousel-inner">
+							<div class="carousel-item active">
+								<img src="images/banner-1.jpg"
+									class="d-block w-100" alt="...">
+							</div>
+							<div class="carousel-item">
+								<img src="images/banner-2.jpg"
+									class="d-block w-100" alt="...">
+							</div>
+						</div>
+						<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade"
+							data-bs-slide="prev">
+							<span class="carousel-control-prev-icon text-white" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade"
+							data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
+					</div>
+				</div>
+			</div>
+
+
+			<div id="texto-main" class="py-5">
+				<h2>Historia</h2>
+				<p>Te contamos nuestra Historia…..
+
+					A principios de la década de los ‘70 el crecimiento de la provincia de Jujuy fue tal que la demanda
+					de profesionales requería de la creación de una casa de estudios de educación superior propia. Es
+					así, que a principios de 1972, se crea por Ley Provincial Nº 2.849 la Universidad Provincial de
+					Jujuy, y con ella se crean las Facultades de Agrarias, Ingeniería, y Ciencias Económicas, a cargo de
+					José Antonio Casas como Primer Rector, Alberto Vigiani, Raúl Quiroz, y Abel Cuadri como decanos de
+					las Facultades respectivamente.
+
+					Particularmente, la Facultad de Ciencias Agrarias se crea para dar respuesta a la demanda de
+					profesionales formados para el desarrollo del sector agrario, el más importante de la provincia en
+					términos productivos. Para este fin, los profesionales involucrados debieron encarar un gran
+					proyecto: el de formar, en base a la investigación, un campo de conocimiento científico sobre las
+					ciencias agrarias aplicadas a Jujuy, objetivo imprescindible para que la nueva casa de estudios
+					pudiera formar, asesorar y brindar servicios concretos a la comunidad. Esta tarea contaba con la
+					dificultad extra de que debía desarrollarse en una provincia de gran diversidad geográfica y
+					ecológica, por lo cual se debían generar métodos propios para cada región. Es así, que la primera
+					carrera de esta facultad fue la de Ingeniería Agronómica, la cual comenzó a dictarse con una
+					matrícula de 169 estudiantes. <a href="https://www.fca.unju.edu.ar/institucional/historia/">Saber más</a></p>
+			</div>
+
+			<div id="noticias" class="container my-5">
+				<h2>Noticias</h2>
+				<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+					<div class="col">
+						<a href="#" class="text-decoration-none">
+							<div class="card h-100">
+								<img src="images/noticia1.jpg"
+									class="card-img-top" loading="lazy" alt="¡Felices 52 años!">
+								<div class="card-body">
+									<p class="card-text">¡Felices 52 años! (24/05/2024)</p>
+								</div>
+							</div>
+						</a>
+					</div>
+					<div class="col">
+						<a href="#" class="text-decoration-none">
+							<div class="card h-100">
+								<img src="images/banner-1.jpg"
+									class="card-img-top" loading="lazy"
+									alt="Extienden fechas de inscripción para la diplomatura en cultivos andinos, uso y consumo">
+								<div class="card-body">
+									<p class="card-text">Extienden fechas de inscripción para la… (24/05/2024)</p>
+								</div>
+							</div>
+						</a>
+					</div>
+					<div class="col">
+						<a href="#" class="text-decoration-none">
+							<div class="card h-100">
+								<img src="images/noticia2.jpeg"
+									class="card-img-top" loading="lazy"
+									alt="Brindaron jornadas de almácigos a estudiantes de Primaria">
+								<div class="card-body">
+									<p class="card-text">Brindaron jornadas de almácigos a estud… (23/05/2024)</p>
+								</div>
+							</div>
+						</a>
+					</div>
+					<div class="col">
+						<a href="#" class="text-decoration-none">
+							<div class="card h-100">
+								<img src="images/noticia3.png"
+									class="card-img-top" loading="lazy"
+									alt="Actividades en Agrarias para el 23 de mayo">
+								<div class="card-body">
+									<p class="card-text">Actividades en Agrarias para el 23 de m… (22/05/2024)</p>
+								</div>
+							</div>
+						</a>
+					</div>
+					<div class="col">
+						<a href="#" class="text-decoration-none">
+							<div class="card h-100">
+								<img src="images/noticia4.jpeg"
+									class="card-img-top" loading="lazy"
+									alt="Becas Belgrano: Acreditan la 1ra cuota para renovantes y habilitan resultados para nuevos postulantes">
+								<div class="card-body">
+									<p class="card-text">Becas Belgrano: Acreditan la 1ra cuota … (21/05/2024)</p>
+								</div>
+							</div>
+						</a>
+					</div>
+					<div class="col">
+						<a href="#" class="text-decoration-none">
+							<div class="card h-100">
+								<img src="images/consejo_social_unju.jpg"
+									class="card-img-top" loading="lazy"
+									alt="Consejo Social de la UNJu informó sobre la situación actual de la institución">
+								<div class="card-body">
+									<p class="card-text">Consejo Social de la UNJu informó sobre… (17/05/2024)</p>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</main>
+		<aside class="border border-3 px-3">
+			<nav class="nav">
+				<a class="nav-link btn btn-info mb-3" href="https://www.fca.unju.edu.ar/institucional/calendario/">Calendario</a>
+				<a class="nav-link btn btn-info mb-3" href="https://virtual.unju.edu.ar/">Unju Virtual</a>
+				<a class="nav-link btn btn-info mb-3" href="https://alumnos.unju.edu.ar/unju/">SIU GUARANI</a>
+				<a class="nav-link btn btn-info mb-3" href="http://www.biblioteca.fca.unju.edu.ar/">Biblioteca</a>
+				<a class="nav-link btn btn-info mb-3" href="https://www.fca.unju.edu.ar/tramites/">Tramites</a>
+				<a class="nav-link btn btn-info mb-3" href="https://www.fca.unju.edu.ar/extension/noticias/">Noticias</a>
+				<a class="nav-link btn btn-info" href="https://www.fca.unju.edu.ar/docentes/concursos">Concursos</a>
+			  </nav>
+		</aside>
+	</div>
+
+
+		<footer class=" row row-cols-1 row-cols-sm-2 row-cols-md-5 p-5 mt-5 border-top"
+		style="background-color: rgb(100, 100, 100); color: #eee;">
+		<div class="col mb-3">
+			<a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+				<svg class="bi me-2" width="40" height="32">
+					<use xlink:href="#bootstrap"></use>
+				</svg>
+			</a>
+			<p class="fs-3 text-uppercase">Contacto</p>
+		</div>
+
+		<div class="col mb-3">
+
+		</div>
+
+		<div class="col mb-3">
+			<h5>Secretaría Académica</h5>
+			<ul class="nav flex-column">
+				<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Contacto:
+						academica@fca.unju.edu.ar</a></li>
+				<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">Teléfono: (0388) 4221544</a></li>
+				<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">biblioteca@fca.unju.edu.ar</a>
+				</li>
+				<li class="nav-item mb-2"><a href="#"
+						class="nav-link p-0 text-light">coordinaciontutorias@fca.unju.edu.ar </a></li>
+			</ul>
+		</div>
+
+		<div class="col mb-3">
+			<h5>Departamento Alumnos</h5>
+			<ul class="nav flex-column">
+				<li class="nav-item mb-2"><a href="#"
+						class="nav-link p-0 text-light">direccionalumnos@fca.unju.edu.ar</a></li>
+				<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-light">(0388) 4244102</a></li>
+			</ul>
+		</div>
+
+		<div class="col mb-3">
+			<h5>Redes Sociales</h5>
+			<ul class="nav flex-column">
+				<li class="nav-item mb-2"><a href="https://www.facebook.com/FCAUNJu.Arg"
+						class="nav-link p-0 text-light">Facebook</a></li>
+				<li class="nav-item mb-2"><a href="https://x.com/fca_unju/" class="nav-link p-0 text-light">X</a></li>
+				<li class="nav-item mb-2"><a href="https://www.youtube.com/c/FacultaddeCienciasAgrariasUNJujuy"
+						class="nav-link p-0 text-light">Youtube</a></li>
+				<li class="nav-item mb-2"><a href="https://www.instagram.com/fca_unju/"
+						class="nav-link p-0 text-light">Instagram</a></li>
+			</ul>
+		</div>
+		</footer>
+	<div  class="d-flex justify-content-center py-3 bg-dark text-white">
+		&copy; Alvaro Maximiliano Ramos 2024 - Programación Visual
+	</div>
+
+	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+
 </html>
