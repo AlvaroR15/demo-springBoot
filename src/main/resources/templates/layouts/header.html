@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeleaf.org" lang="es">
+	<head th:fragment="head">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link data-th-rel="stylesheet" data-th-href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+		<title data-th-text="${title}"></title>
+	</head>
 	<body>
-		<header th:fragment="header">
+		<header data-th-fragment="header">
 				<div class="d-flex flex-wrap justify-content-center align-items-center py-3 mb-0 border-bottom h-25 text-bg-secondary"
 				id="header">
 					<div class="container-fluid text-center">
