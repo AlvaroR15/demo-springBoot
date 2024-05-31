@@ -4,7 +4,7 @@
 <head data-th-replace="/layouts/header :: head"></head>
 <body>
 	
-	<header data-th-replace="/layouts/header :: header"></header>
+	<header data-th-replace="~{/layouts/header :: header}"></header>
 
 	<div id="container-main-aside" class="d-flex w-10 p-5 border m-auto">
 		<main>
@@ -149,7 +149,7 @@
 		</aside>
 	</div>
 
-	<footer data-th-replace="/layouts/footer :: footer"></footer>
+	<footer data-th-replace="~{/layouts/footer :: footer}"></footer>
 
 	<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>

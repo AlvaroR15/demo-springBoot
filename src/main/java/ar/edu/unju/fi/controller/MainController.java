@@ -12,4 +12,9 @@ public class MainController {
 		model.addAttribute("title","Facultad de Ciencias Agrarias");
 		return "index";
 	}
+	
+	@GetMapping("/form")
+	public String getForm() {
+		return "form-carreras";
+	}
 }

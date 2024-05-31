@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 import org.springframework.stereotype.Component;
 
@@ -66,6 +68,18 @@ public class CollectionAlumno {
 				alumno.setFechaNacimiento(nuevoAlumno.getFechaNacimiento());
 			}
 		}
+	}
+	
+	/**
+	 * Busca un alumno
+	 */
+	
+	public Alumno getAlumno(String dni) {
+		Predicate<Alumno> filterAlumno = alumno -> alumno.getDni().equals(dni);
+		Optional<Alumno> alumno = alumnos.stream().filter(filterAlumno).findFirst();
+		if (alumno.isPresent()) {
+			return alumno.get();
+		} else return null;
 	}
 	
 }

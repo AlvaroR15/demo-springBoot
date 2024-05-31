@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head data-th-replace="~{/layouts/header :: head}"></head>
+	<body>
+		<header data-th-replace="~{/layouts/header :: header}"></header>
+		
+		<div class="d-flex justify-content-center my-5"><a class="btn btn-success">Nueva carrera</a></div>
+		<div class="container-sm py-5 border my-3">
+			<table class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col">Código</th>
+			      <th scope="col">Nombre</th>
+			      <th scope="col">Cantidad de años</th>
+			      <th scope="col">Estado</th>
+			    </tr>
+			  </thead>
+			  <tbody >
+			    <tr data-th-each="carrera: ${carreras}">
+			      <th scope="row" data-th-text="${carrera.codigo}"></th>
+			      <td data-th-text="${carrera.nombre}"></td>
+			      <td data-th-text="${carrera.cantidadDeAnios}"></td>
+			      <td data-th-text="${carrera.estado}"></td>
+				  <td><a data-th-href="@{/admin/carreras/delete/}+${carrera.codigo}" role="button" class="btn btn-danger">Eliminar</a></td>
+				  <td><a><button type="button" class="btn btn-warning">Editar</button></a></td>
+
+			    </tr>
+			  </tbody>
+			</table>
+		</div>
+		
+		<footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	</body>
+</html>

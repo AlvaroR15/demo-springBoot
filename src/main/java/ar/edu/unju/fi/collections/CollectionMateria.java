@@ -3,6 +3,8 @@ package ar.edu.unju.fi.collections;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 import ar.edu.unju.fi.model.Carrera;
 import ar.edu.unju.fi.model.Docente;
@@ -21,7 +23,7 @@ public class CollectionMateria {
 	
 */
 
-	public static List<Materia> materias = new ArrayList<Materia>();
+	private static List<Materia> materias = new ArrayList<Materia>();
 	
 	
 	public List<Materia> getMaterias() {
@@ -56,6 +58,10 @@ public class CollectionMateria {
 	}
 	
 	
+	/**
+	 * Borra una materia
+	 * @param codigo
+	 */
 	public void deleteMateria(String codigo) {
 		Iterator iterator = materias.iterator();
 		while(iterator.hasNext()) {
@@ -66,5 +72,19 @@ public class CollectionMateria {
 		}
 	}
 	
+	/**
+	 * Buscar una materia
+	 */
+	
+	public Materia getMateria(String codigo) { 
+		Predicate<Materia> filterMateria = materia -> materia.getCodigo().equals(codigo);
+		Optional<Materia> materia = materias.stream().filter(filterMateria).findFirst();
+		if (materia.isPresent()) {
+			return materia.get();
+		} else {
+			return null;
+		}
+		
+	}
 	
 }

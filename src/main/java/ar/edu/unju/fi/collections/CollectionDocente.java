@@ -3,6 +3,8 @@ package ar.edu.unju.fi.collections;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 import ar.edu.unju.fi.model.Docente;
 
@@ -59,5 +61,17 @@ public class CollectionDocente {
 				iterator.remove();
 			}
 		}
+	}
+	
+	/**
+	 * Busca un docente
+	 */
+	
+	public Docente getDocente(String legajo) {
+		Predicate<Docente> filterDocente = docente -> docente.getLegajo().equals(legajo);
+		Optional<Docente> docente = docentes.stream().filter(filterDocente).findFirst();
+		if(docente.isPresent()) {
+			return docente.get();
+		} else return null;
 	}
 }
