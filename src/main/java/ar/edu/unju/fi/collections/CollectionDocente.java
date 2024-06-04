@@ -9,14 +9,7 @@ import java.util.function.Predicate;
 import ar.edu.unju.fi.model.Docente;
 
 public class CollectionDocente {
-	/*	private String legajo;
-	private String nombre;
-	private String apellido;
-	private String email;
-	private String telefono;
-	 * 
-	 * */
-	
+
 	public static List<Docente> docentes = new ArrayList<Docente>();
 	
 	/**

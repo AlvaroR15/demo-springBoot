@@ -13,8 +13,5 @@ public class MainController {
 		return "index";
 	}
 	
-	@GetMapping("/form")
-	public String getForm() {
-		return "form-carreras";
-	}
+	
 }
