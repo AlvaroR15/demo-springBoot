@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head data-th-replace="~{/layouts/header :: head}"></head>
+	<body>
+		<header data-th-replace="~{/layouts/header :: header}"></header>
+		
+		<div class="d-flex justify-content-center my-5"><a class="btn btn-success" data-th-href="@{/alumnos/create}" role="button">Nuevo Alumno</a></div>
+		<div class="container-sm py-5 border my-3">
+			<table class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col">DNI</th>
+			      <th scope="col">Nombre</th>
+			      <th scope="col">Apellido</th>
+				  <th scope="col">Email</th>
+				  <th scope="col">Teléfono</th>
+				  <th scope="col">Fecha de Nacimiento</th>
+				  <th scope="col">Domicilio</th>
+				  <th scope="col">LU</th>
+			    </tr>
+			  </thead>
+			  <tbody >
+			    <tr data-th-each="alumno : ${alumnos}">
+			      <th scope="row" data-th-text="${alumno.dni}"></th>
+			      <td data-th-text="${alumno.nombre}"></td>
+			      <td data-th-text="${alumno.apellido}"></td>
+			      <td data-th-text="${alumno.email}"></td>
+			      <td data-th-text="${alumno.telefono}"></td>
+			      <td data-th-text="${alumno.fechaNacimiento}"></td>
+			      <td data-th-text="${alumno.domicilio}"></td>
+			      <td data-th-text="${alumno.lu}"></td>
+				  <td><a data-th-href="@{/alumnos/delete/}+${alumno.dni}" role="button" class="btn btn-danger">Eliminar</a></td>
+				  <td><a data-th-href="@{/alumnos/edit/}+${alumno.dni}" role="button" class="btn btn-warning">Editar</a></td>
+
+			    </tr>
+			  </tbody>
+			</table>
+		</div>
+		
+		<footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	</body>
+</html>
