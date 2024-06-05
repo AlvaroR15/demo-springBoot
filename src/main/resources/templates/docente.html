@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head data-th-replace="~{/layouts/header :: head}"></head>
+	
+	<body>
+		<header data-th-replace="~{/layouts/header :: header}"></header>
+		
+		<h2 class="text-center my-4" data-th-text="${titleForm}"></h2>
+		<div class="container-sm">
+			<form data-th-action="${action == 'create'}? @{/docentes/create} : @{/docentes/edit}"  th:object="${docente}" class="w-50 m-auto my-5 p-3 border border-dark" method="post">
+				<div class="mb-3">
+				  <label for="legajo" class="form-label">Legajo</label>
+				  <input type="text" th:class="'form-control ' + ${action == 'edit' ? 'opacity-75' : ''}"
+				   id="legajo"
+				   name="legajo"
+				   th:field="*{legajo}"
+				   th:readonly="${action == 'edit'}">
+				</div>
+				<div class="mb-3">
+				  <label for="nombre" class="form-label">Nombre</label>
+				  <input type="text" class="form-control" id="nombre" th:field="*{nombre}">
+				</div>
+				<div class="mb-3">
+				  <label for="apellido" class="form-label">Apellido</label>
+				  <input type="text" class="form-control" id="apellido" th:field="*{apellido}">
+				</div>
+				<div class="mb-3">
+				  <label for="email" class="form-label">Email</label>
+				  <input type="text" class="form-control" id="email" th:field="*{email}">
+				</div>
+				<div class="mb-3">
+				  <label for="telefono" class="form-label">Teléfono</label>
+				  <input type="text" class="form-control" id="telefono" th:field="*{telefono}">
+				</div>
+				
+				<div class="d-flex justify-content-center py-3 my-2">
+					<input type="submit" th:value="Hacer" class="btn btn-primary">
+				</div>
+			</form>			
+		</div>
+		
+		<footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+	</body>
+</html>

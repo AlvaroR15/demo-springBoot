@@ -16,7 +16,7 @@ public class CollectionDocente {
 	 * Devuelve todos los docentes en lista
 	 */
 	
-	public List<Docente> getDocentes() {
+	public static List<Docente> getDocentes() {
 		if (docentes.isEmpty()) {
 			docentes.add(new Docente("1","Carolina","Apaza","caro@gmail.com","388509124"));
 			docentes.add(new Docente("2","Ariel","Vega","vega@gmail.com","3885030651"));
@@ -27,11 +27,16 @@ public class CollectionDocente {
 	}
 	
 	
+	public static void saveDocente(Docente nuevoDocente) {
+		docentes.add(nuevoDocente);
+	}
+	
+	
 	/**
 	 * Edita 
 	 */
 	
-	public void editDocente(Docente nuevoDocente) {
+	public static void editDocente(Docente nuevoDocente) {
 		for(Docente docente: docentes) {
 			if (docente.getLegajo().equals(nuevoDocente.getLegajo())) {
 				docente.setNombre(nuevoDocente.getNombre());
@@ -46,7 +51,7 @@ public class CollectionDocente {
 	 * Elimina un docente si lo encuentra en lista
 	 */
 	
-	public void deleteDocente(String legajo) {
+	public static void deleteDocente(String legajo) {
 		Iterator iterator = docentes.iterator();
 		while(iterator.hasNext()) {
 			Docente docente = (Docente) iterator.next();
@@ -60,7 +65,7 @@ public class CollectionDocente {
 	 * Busca un docente
 	 */
 	
-	public Docente getDocente(String legajo) {
+	public static Docente getDocente(String legajo) {
 		Predicate<Docente> filterDocente = docente -> docente.getLegajo().equals(legajo);
 		Optional<Docente> docente = docentes.stream().filter(filterDocente).findFirst();
 		if(docente.isPresent()) {
