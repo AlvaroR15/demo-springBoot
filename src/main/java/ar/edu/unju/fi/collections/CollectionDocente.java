@@ -6,12 +6,16 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import ar.edu.unju.fi.model.Docente;
 
-public class CollectionDocente {
+public  class CollectionDocente {
 
-	public static List<Docente> docentes = new ArrayList<Docente>();
+	private static List<Docente> docentes = new ArrayList<Docente>();
 	
+	
+
 	/**
 	 * Devuelve todos los docentes en lista
 	 */
@@ -70,6 +74,8 @@ public class CollectionDocente {
 		Optional<Docente> docente = docentes.stream().filter(filterDocente).findFirst();
 		if(docente.isPresent()) {
 			return docente.get();
-		} else return null;
+		} else {
+			return null;
+		}
 	}
 }
