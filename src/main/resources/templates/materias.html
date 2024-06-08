@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head data-th-replace="~{/layouts/header :: head}"></head>
+	<body>
+		<header data-th-replace="~{/layouts/header :: header}"></header>
+		
+		<div class="d-flex justify-content-center my-5"><a class="btn btn-success" data-th-href="@{/materias/create}" role="button">Nueva Materia</a></div>
+		<div class="container-sm py-5 border my-3">
+			<table class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col">Código</th>
+			      <th scope="col">Nombre</th>
+			      <th scope="col">Curso</th>
+				  <th scope="col">Cantidad de hs</th>
+				  <th scope="col">Modalidad</th>
+				  <th scope="col">Docente</th>
+				  <th scope="col">Carrera</th>
+			    </tr>
+			  </thead>
+			  <tbody >
+			    <tr data-th-each="materia : ${materias}">
+			      <th scope="row" data-th-text="${materia.codigo}"></th>
+			      <td data-th-text="${materia.nombre}"></td>
+			      <td data-th-text="${materia.curso}"></td>
+			      <td data-th-text="${materia.cantidadHoras}"></td>
+			      <td data-th-text="${materia.modalidad}"></td>
+			      <td data-th-text="${materia?.docente?.nombre}"></td>
+			      <td data-th-text="${materia?.carrera?.nombre}"></td>
+				  <td><a data-th-href="@{/materias/delete/}+${materia.codigo}" role="button" class="btn btn-danger">Eliminar</a></td>
+				  <td><a data-th-href="@{/materias/edit/}+${materia.codigo}" role="button" class="btn btn-warning">Editar</a></td>
+
+			    </tr>
+			  </tbody>
+			</table>
+		</div>
+		
+		<footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	</body>
+</html>

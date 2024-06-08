@@ -6,11 +6,15 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import ar.edu.unju.fi.model.Carrera;
 
 public class CollectionCarrera {
 
-	public static List<Carrera> carreras = new ArrayList<Carrera>();
+	
+	private static List<Carrera> carreras = new ArrayList<Carrera>();
+	
 	
 
 	public static List<Carrera> getCarreras() {

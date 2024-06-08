@@ -13,37 +13,25 @@ import ar.edu.unju.fi.model.Docente;
 import ar.edu.unju.fi.model.Materia;
 
 public class CollectionMateria {
-/**
- * 	private String codigo;
-	private String nombre;
-	private String curso;
-	private float cantidadHoras;
-	private String modalidad;
-	private Docente docente;
-	private Carrera carrera;
 	
 	
-*/
 	
-	@Autowired
-	public CollectionCarrera collectionCarrera;
-	public CollectionDocente collectionDocente;
 
-	private static List<Materia> materias = new ArrayList<Materia>();
+	public static List<Materia> materias = new ArrayList<Materia>();
 	
-	
-	public List<Materia> getMaterias() {
+	public static List<Materia> getMaterias() {
+		CollectionCarrera.getCarreras();
+		CollectionDocente.getDocentes();
 		if (materias.isEmpty()) {
-			
-			materias.add(new Materia("A11","Programacion Visual", "12", 6, "Virtual",collectionDocente.getDocente("1"),collectionCarrera.getCarrera(3)));
-			materias.add(new Materia("A22","Ingles Avanzado", "1", 4, "Presencial",collectionDocente.getDocente("2"),collectionCarrera.getCarrera(1)));
-			materias.add(new Materia("A33","Estructura de datos", "10", 6, "Virtual",collectionDocente.getDocente("3"),collectionCarrera.getCarrera(2)));
+		            materias.add(new Materia("A11", "Programacion Visual", "12", (byte) 6, "Virtual", CollectionDocente.getDocente("1"), CollectionCarrera.getCarrera(1)));
+		            materias.add(new Materia("A22", "Ingles Avanzado", "1", (byte) 4, "Presencial", CollectionDocente.getDocente("2"), CollectionCarrera.getCarrera(2)));
 		}
+		System.out.println(materias);
 		return materias;
 	}
 	
 	
-	public void editMateria(Materia nuevaMateria) {
+	public static void editMateria(Materia nuevaMateria) {
 		for (Materia materia: materias) {
 			if (materia.getCodigo().equals(nuevaMateria.getCodigo())) {
 				materia.setNombre(nuevaMateria.getNombre());
@@ -56,12 +44,16 @@ public class CollectionMateria {
 		}
 	}
 	
+	public static void saveMateria(Materia nuevaMateria) {
+		materias.add(nuevaMateria);
+	}
+	
 	
 	/**
 	 * Borra una materia
 	 * @param codigo
 	 */
-	public void deleteMateria(String codigo) {
+	public static void deleteMateria(String codigo) {
 		Iterator iterator = materias.iterator();
 		while(iterator.hasNext()) {
 			Materia materia = (Materia)iterator.next();
@@ -75,7 +67,7 @@ public class CollectionMateria {
 	 * Buscar una materia
 	 */
 	
-	public Materia getMateria(String codigo) { 
+	public static Materia getMateria(String codigo) { 
 		Predicate<Materia> filterMateria = materia -> materia.getCodigo().equals(codigo);
 		Optional<Materia> materia = materias.stream().filter(filterMateria).findFirst();
 		if (materia.isPresent()) {
