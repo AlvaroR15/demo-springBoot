@@ -1,41 +1,77 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head data-th-replace="~{/layouts/header :: head}"></head>
-	<body>
-		<header data-th-replace="~{/layouts/header :: header}"></header>
-		
-		<div class="d-flex justify-content-center my-5"><a class="btn btn-success" data-th-href="@{/materias/create}" role="button">Nueva Materia</a></div>
-		<div class="container-sm py-5 border my-3">
-			<table class="table">
-			  <thead>
-			    <tr>
-			      <th scope="col">Código</th>
-			      <th scope="col">Nombre</th>
-			      <th scope="col">Curso</th>
-				  <th scope="col">Cantidad de hs</th>
-				  <th scope="col">Modalidad</th>
-				  <th scope="col">Docente</th>
-				  <th scope="col">Carrera</th>
-			    </tr>
-			  </thead>
-			  <tbody >
-			    <tr data-th-each="materia : ${materias}">
-			      <th scope="row" data-th-text="${materia.codigo}"></th>
-			      <td data-th-text="${materia.nombre}"></td>
-			      <td data-th-text="${materia.curso}"></td>
-			      <td data-th-text="${materia.cantidadHoras}"></td>
-			      <td data-th-text="${materia.modalidad}"></td>
-			      <td data-th-text="${materia?.docente?.nombre}"></td>
-			      <td data-th-text="${materia?.carrera?.nombre}"></td>
-				  <td><a data-th-href="@{/materias/delete/}+${materia.codigo}" role="button" class="btn btn-danger">Eliminar</a></td>
-				  <td><a data-th-href="@{/materias/edit/}+${materia.codigo}" role="button" class="btn btn-warning">Editar</a></td>
-
-			    </tr>
-			  </tbody>
-			</table>
-		</div>
-		
-		<footer data-th-replace="~{/layouts/footer :: footer}"></footer>
-		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
-	</body>
+<head data-th-replace="~{/layouts/header :: head}"></head>
+<body>
+    <header data-th-replace="~{/layouts/header :: header}"></header>
+    
+    <div class="d-flex justify-content-center my-5">
+        <a class="btn btn-success" data-th-href="@{/materias/create}" role="button">Nueva Materia</a>
+    </div>
+    <div class="container-sm py-5 border my-3">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Curso</th>
+                    <th scope="col">Cantidad de hs</th>
+                    <th scope="col">Modalidad</th>
+                    <th scope="col">Docente</th>
+                    <th scope="col">Carrera</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="materia : ${materias}">
+                    <th scope="row" th:text="${materia.codigo}"></th>
+                    <td th:text="${materia.nombre}"></td>
+                    <td th:text="${materia.curso}"></td>
+                    <td th:text="${materia.cantidadHoras}"></td>
+                    <td th:text="${materia.modalidad}"></td>
+                    <td th:text="${materia?.docente?.nombre}"></td>
+                    <td th:text="${materia?.carrera?.nombre}"></td>
+                    <td>
+                        <button th:data-codMateria="${materia.codigo}" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Eliminar</button>
+                    </td>
+                    <td>
+                        <a th:href="@{/materias/edit/{codigo}(codigo=${materia.codigo})}" role="button" class="btn btn-warning">Editar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="modal" id="deleteModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">¿Está seguro de que quiere eliminar esta materia?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Si desea cancelar la operación, presione el botón Cancelar.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <form th:action="@{/materias/delete/{codMateria}(codMateria)=${selectedCodMateria}}" id="deleteForm" method="get">
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var deleteModal = document.getElementById('deleteModal');
+            deleteModal.addEventListener('show.bs.modal', function(e) {
+                var button = e.relatedTarget;
+                var codMateria = button.getAttribute('data-codmateria');
+                var form = deleteModal.querySelector('form');
+                form.setAttribute('action', '/materias/delete/' + codMateria);
+            });
+        });
+    </script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
 </html>

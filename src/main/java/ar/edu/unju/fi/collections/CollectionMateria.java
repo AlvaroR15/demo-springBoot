@@ -30,21 +30,29 @@ public class CollectionMateria {
 	}
 	
 	
-	public static void editMateria(Materia nuevaMateria) {
-		for (Materia materia: materias) {
-			if (materia.getCodigo().equals(nuevaMateria.getCodigo())) {
-				materia.setNombre(nuevaMateria.getNombre());
-				materia.setCurso(nuevaMateria.getCurso());
-				materia.setCantidadHoras(nuevaMateria.getCantidadHoras());
-				materia.setModalidad(nuevaMateria.getModalidad());
-				materia.setDocente(nuevaMateria.getDocente());
-				materia.setCarrera(nuevaMateria.getCarrera());
+	public static void editMateria(Materia nuevaMateria) throws Exception {
+		boolean encontrada = false;
+		try {
+			for (Materia materia: materias) {
+				if (materia.getCodigo().equals(nuevaMateria.getCodigo())) {
+					materia.setNombre(nuevaMateria.getNombre());
+					materia.setCurso(nuevaMateria.getCurso());
+					materia.setCantidadHoras(nuevaMateria.getCantidadHoras());
+					materia.setModalidad(nuevaMateria.getModalidad());
+					materia.setDocente(nuevaMateria.getDocente());
+					materia.setCarrera(nuevaMateria.getCarrera());
+					encontrada = true;
+				}
 			}
+			if(!encontrada) throw new Exception("La materia con el código: "+nuevaMateria.getCodigo()+" no fue encontrada");
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+			throw e;
 		}
 	}
 	
-	public static void saveMateria(Materia nuevaMateria) {
-		materias.add(nuevaMateria);
+	public static boolean saveMateria(Materia nuevaMateria) {
+		return materias.add(nuevaMateria)?true:false;
 	}
 	
 	

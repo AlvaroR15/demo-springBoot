@@ -30,6 +30,8 @@ public class MateriaController {
 	public String getMateriasView(Model model) {
 		model.addAttribute("title", "Materias");
 		model.addAttribute("materias", CollectionMateria.getMaterias());
+		model.addAttribute("response", false);
+		model.addAttribute("msg", "");
 		return "materias";
 	}
 	
@@ -59,19 +61,39 @@ public class MateriaController {
 		Carrera carrera = CollectionCarrera.getCarrera(nuevaMateria.getCarrera().getCodigo());
 		nuevaMateria.setDocente(docente);
 		nuevaMateria.setCarrera(carrera);
-		CollectionMateria.saveMateria(nuevaMateria);
+		boolean response = CollectionMateria.saveMateria(nuevaMateria);
+		String msg;
+		if (response) {
+			msg = "Materia agregada con éxito!";
+		} else {
+			msg = "¡Ocurrió un problema! :(";
+		}
+		model.addAttribute("response", response);
+		model.addAttribute("msg", msg);
 		model.addAttribute("materias", CollectionMateria.getMaterias());
-		return "redirect:/materias";
+		return "materias";
 	}
 	
 	@PostMapping("/edit")
-	public String editMateria(@ModelAttribute Materia materia) {
+	public String editMateria(@ModelAttribute Materia materia, Model model) {
 		Docente docente = CollectionDocente.getDocente(materia.getDocente().getLegajo());
 		Carrera carrera = CollectionCarrera.getCarrera(materia.getCarrera().getCodigo());
 		materia.setDocente(docente);
 		materia.setCarrera(carrera);
-		CollectionMateria.editMateria(materia);
-		return "redirect:/materias";
+		boolean response = false;
+		String msg = "";
+		try {
+			CollectionMateria.editMateria(materia);
+			msg = "La materia con código "+materia.getCodigo()+" fue modificada con éxito";
+			response = true;
+		} catch(Exception e) {
+			msg = e.getMessage();
+			e.printStackTrace();
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("response", response);
+		model.addAttribute("materias", CollectionMateria.getMaterias());
+		return "materias";
 	}
 	
 	@GetMapping("/delete/{codigo}")

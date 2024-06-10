@@ -29,15 +29,43 @@
 			      <td data-th-text="${alumno.fechaNacimiento}"></td>
 			      <td data-th-text="${alumno.domicilio}"></td>
 			      <td data-th-text="${alumno.lu}"></td>
-				  <td><a data-th-href="@{/alumnos/delete/}+${alumno.dni}" role="button" class="btn btn-danger">Eliminar</a></td>
+				  <td><button th:data-codAlumno="${alumno.dni}" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Eliminar</button></td>
 				  <td><a data-th-href="@{/alumnos/edit/}+${alumno.dni}" role="button" class="btn btn-warning">Editar</a></td>
 
 			    </tr>
 			  </tbody>
 			</table>
 		</div>
-		
+		<div class="modal" id="deleteModal" tabindex="-1">
+			<div class="modal-dialog">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title">¿Esta seguro de que quiere eliminar esta carrera?</h5>
+				  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+				  <p>Si desea cancelar la operacion aprete el boton Cancelar</p>
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+				  <form th:action="@{/alumnos/delete/{codAlumno}(codAlumno=${selectedCodAlumno})}" method="get">
+					  <button type="submit" class="btn btn-danger">Eliminar</button>
+				  </form>				
+				</div>
+			  </div>
+			</div>
 		<footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+		<script>
+		    document.addEventListener('DOMContentLoaded', function() {
+		        var deleteModal = document.getElementById('deleteModal');
+		        deleteModal.addEventListener('show.bs.modal', function(e) {
+		            var button = e.relatedTarget;
+		            var codAlumno = button.getAttribute('data-codalumno');
+		            var form = deleteModal.querySelector('form');
+		            form.setAttribute('action', '/alumnos/delete/' + codAlumno);
+		        });
+		    });
+		</script>
 		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 	</body>
 </html>
