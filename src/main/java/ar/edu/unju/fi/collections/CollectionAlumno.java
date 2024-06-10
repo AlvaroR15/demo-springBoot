@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import ar.edu.unju.fi.model.Alumno;
@@ -14,6 +15,9 @@ import ar.edu.unju.fi.model.Alumno;
 
 public class CollectionAlumno {
 
+	@Autowired
+	private Alumno alumno;
+	
 	private static List<Alumno> alumnos = new ArrayList<Alumno>();
 	
 	/**

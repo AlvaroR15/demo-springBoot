@@ -11,9 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ar.edu.unju.fi.model.Docente;
 
 public  class CollectionDocente {
-
-	private static List<Docente> docentes = new ArrayList<Docente>();
 	
+	private static List<Docente> docentes = new ArrayList<Docente>();
 	
 
 	/**

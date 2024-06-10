@@ -13,11 +13,10 @@ import ar.edu.unju.fi.model.Docente;
 import ar.edu.unju.fi.model.Materia;
 
 public class CollectionMateria {
-	
-	
-	
 
-	public static List<Materia> materias = new ArrayList<Materia>();
+	
+	private static List<Materia> materias = new ArrayList<Materia>();
+
 	
 	public static List<Materia> getMaterias() {
 		CollectionCarrera.getCarreras();

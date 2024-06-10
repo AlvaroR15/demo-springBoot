@@ -4,7 +4,17 @@
 	<body>
 		<header data-th-replace="~{/layouts/header :: header}"></header>
 		
-		<div class="d-flex justify-content-center my-5"><a class="btn btn-success" data-th-href="@{/carreras/create}" role="button">Nueva carrera</a></div>
+		<div class="text-center my-5">
+			<a class="btn btn-success block" data-th-href="@{/carreras/create}" role="button">Nueva carrera</a>
+			<div class="alert alert-success w-50 my-4 m-auto" role="alert" th:if="${response}">
+				<span style="font-size: 1.2rem;" data-th-text="${msg}"></span>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+			<div class="alert alert-danger w-50 my-4 m-auto" role="alert" th:if="${!response && msg != ''}">
+				<span style="font-size: 1.2rem;" data-th-text="${msg}"></span>
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
+		</div>
 		<div class="container-sm py-5 border my-3">
 			<table class="table">
 			  <thead>
@@ -21,7 +31,7 @@
 			      <td data-th-text="${carrera.nombre}"></td>
 			      <td data-th-text="${carrera.cantidadDeAnios}"></td>
 			      <td data-th-text="${carrera.estado}"></td>
-				  <td><a data-th-href="@{/carreras/delete/}+${carrera.codigo}" role="button" class="btn btn-danger">Eliminar</a></td>
+				  <td><button th:data-codCarrera="${carrera.codigo}" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Eliminar</button>
 				  <td><a data-th-href="@{/carreras/edit/}+${carrera.codigo}" role="button" class="btn btn-warning">Editar</a></td>
 
 			    </tr>
@@ -29,7 +39,39 @@
 			</table>
 		</div>
 		
+		<div class="modal" id="deleteModal" tabindex="-1">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title">¿Esta seguro de que quiere eliminar esta carrera?</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		        <p>Si desea cancelar la operacion aprete el boton Cancelar</p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+				<form th:action="@{/carreras/delete/{codCarrera}(codCarrera=${selectedCodCarrera})}" method="get">
+					<button type="submit" class="btn btn-danger">Eliminar</button>
+				</form>				
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
 		<footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+		<script>
+		    document.addEventListener('DOMContentLoaded', function() {
+		        var deleteModal = document.getElementById('deleteModal');
+		        deleteModal.addEventListener('show.bs.modal', function(e) {
+		            var button = e.relatedTarget;
+		            var codCarrera = button.getAttribute('data-codcarrera');
+		            var form = deleteModal.querySelector('form');
+		            form.setAttribute('action', '/carreras/delete/' + codCarrera);
+		        });
+		    });
+		</script>
+
 		<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 	</body>
 </html>
