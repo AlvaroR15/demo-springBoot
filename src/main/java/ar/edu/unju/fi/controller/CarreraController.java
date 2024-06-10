@@ -16,7 +16,6 @@ import ar.edu.unju.fi.model.Carrera;
 @Controller
 @RequestMapping("/carreras")
 public class CarreraController {
-	
 	@Autowired
 	private Carrera carrera;
 	
@@ -29,6 +28,8 @@ public class CarreraController {
 	public String getCarrerasView(Model model) {
 		model.addAttribute("carreras", CollectionCarrera.getCarreras());
 		model.addAttribute("title", "carreras");
+		model.addAttribute("response", false);
+		model.addAttribute("msg", "");
 		return "carreras";
 	}
 	
@@ -48,12 +49,19 @@ public class CarreraController {
 	}
 	
 	@PostMapping("/create")
-	public ModelAndView createCarrera(@ModelAttribute("carrera") Carrera carrera) {
-		ModelAndView modelView = new ModelAndView("carreras");
-		carrera.setEstado("Activa");
-		CollectionCarrera.saveCarrera(carrera);
-		modelView.addObject("carreras", CollectionCarrera.getCarreras());
-		return modelView;
+	public String createCarrera(@ModelAttribute("carrera") Carrera carrera, Model model) {
+		carrera.setEstado("Activa");		
+		boolean response = CollectionCarrera.saveCarrera(carrera);
+		String msg;
+		if (response) {
+			msg = "¡Carrera agregada con éxito!";
+		} else {
+			msg = "¡Ocurrió un problema! :(";
+		}
+		model.addAttribute("response", response);
+		model.addAttribute("msg", msg);
+		model.addAttribute("carreras", CollectionCarrera.getCarreras());
+		return "carreras";
 	}
 	
 	
@@ -90,9 +98,21 @@ public class CarreraController {
 	}
 	
 	@PostMapping("/edit")
-	public String editCarrera(@ModelAttribute("carrera")Carrera carrera) {
-		CollectionCarrera.editCarrera(carrera);
-		return "redirect:/carreras";
+	public String editCarrera(@ModelAttribute("carrera")Carrera carrera, Model model) {
+		boolean response = false;
+		String msg = "";
+		try {
+			CollectionCarrera.editCarrera(carrera);
+			msg = "La carrera con código "+carrera.getCodigo()+" fue modificada con éxito";
+			response = true;
+		} catch(Exception e) {
+			msg = e.getMessage();
+			e.printStackTrace();
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("response", response);
+		model.addAttribute("carreras", CollectionCarrera.getCarreras());
+		return "carreras";
 	}
 	
 }

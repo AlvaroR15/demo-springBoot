@@ -12,8 +12,9 @@ import ar.edu.unju.fi.model.Carrera;
 
 public class CollectionCarrera {
 
-	
 	private static List<Carrera> carreras = new ArrayList<Carrera>();
+	
+	
 	
 	
 
@@ -34,23 +35,34 @@ public class CollectionCarrera {
 	 * Crea una carrera
 	 * @param carrera
 	 */
-	public static void saveCarrera(Carrera carrera) {
-		carreras.add(carrera);
+	public static boolean saveCarrera(Carrera carrera) {
+		return carreras.add(carrera) ? true : false;
 	}
 	
 	
 	/**
 	 * Actualiza la carrera
 	 * @param nuevaCarrera
+	 * @throws Exception 
 	 */
-	public static void editCarrera(Carrera nuevaCarrera) {
+	public static void editCarrera(Carrera nuevaCarrera) throws Exception {
+		boolean encontrado = false;
+		try {
 		for (Carrera carrera: carreras) {
 			if (carrera.getCodigo() == nuevaCarrera.getCodigo()) {
 				carrera.setNombre(nuevaCarrera.getNombre());
 				carrera.setCantidadDeAnios(nuevaCarrera.getCantidadDeAnios());
 				carrera.setEstado(nuevaCarrera.getEstado());
+				encontrado = true;
 			}
 		}
+		if(!encontrado) throw new Exception("La carrera con el codigo: " + nuevaCarrera.getCodigo() + " no fue encontrada");
+		
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+			throw e;
+		}
+		
 	}
 	
 	

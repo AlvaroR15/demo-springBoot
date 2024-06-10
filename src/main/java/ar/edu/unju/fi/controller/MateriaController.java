@@ -55,11 +55,6 @@ public class MateriaController {
 	
 	@PostMapping("/create")
 	public String createMateria(@ModelAttribute Materia nuevaMateria, Model model) {
-		/*ModelAndView modelView = new ModelAndView("materias");
-		CollectionMateria.saveMateria(nuevaMateria);
-		modelView.addObject("materias", CollectionMateria.getMaterias());
-		return modelView;*/
-
 		Docente docente = CollectionDocente.getDocente(nuevaMateria.getDocente().getLegajo());
 		Carrera carrera = CollectionCarrera.getCarrera(nuevaMateria.getCarrera().getCodigo());
 		nuevaMateria.setDocente(docente);
