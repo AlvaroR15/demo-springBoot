@@ -41,8 +41,8 @@ public class CollectionAlumno {
 	 * Crea un nuevo alumno en la lista
 	 * @param alumno
 	 */
-	public static void saveAlumno(Alumno alumno) {
-		alumnos.add(alumno);
+	public static boolean saveAlumno(Alumno alumno) {
+		return alumnos.add(alumno)? true:false;
 	}
 	
 
@@ -64,15 +64,24 @@ public class CollectionAlumno {
 	/**
 	 * Actualiza los datos del alumno si este se encuentra en la lista
 	 * @param nuevoAlumno
+	 * @throws Exception 
 	 */
-	public static void editAlumno(Alumno nuevoAlumno) {
-		for (Alumno alumno: alumnos) {
-			if (alumno.getDni().equals(nuevoAlumno.getDni())) {
-				alumno.setNombre(nuevoAlumno.getNombre());
-				alumno.setApellido(nuevoAlumno.getApellido());
-				alumno.setEmail(nuevoAlumno.getEmail());
-				alumno.setFechaNacimiento(nuevoAlumno.getFechaNacimiento());
+	public static void editAlumno(Alumno nuevoAlumno) throws Exception {
+		boolean encontrado = false;
+		try {
+			for (Alumno alumno: alumnos) {
+				if (alumno.getDni().equals(nuevoAlumno.getDni())) {
+					alumno.setNombre(nuevoAlumno.getNombre());
+					alumno.setApellido(nuevoAlumno.getApellido());
+					alumno.setEmail(nuevoAlumno.getEmail());
+					alumno.setFechaNacimiento(nuevoAlumno.getFechaNacimiento());
+					encontrado = true;
+				}
 			}
+			if(!encontrado) throw new Exception("El alumno con el DNI: " +nuevoAlumno.getDni()+ " no fue encontrado.");
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+			throw e;
 		}
 	}
 	

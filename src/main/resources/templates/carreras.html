@@ -31,9 +31,8 @@
 			      <td data-th-text="${carrera.nombre}"></td>
 			      <td data-th-text="${carrera.cantidadDeAnios}"></td>
 			      <td data-th-text="${carrera.estado}"></td>
-				  <td><button th:data-codCarrera="${carrera.codigo}" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Eliminar</button>
+				  <td><button th:data-codCarrera="${carrera.codigo}" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Eliminar</button></td>
 				  <td><a data-th-href="@{/carreras/edit/}+${carrera.codigo}" role="button" class="btn btn-warning">Editar</a></td>
-
 			    </tr>
 			  </tbody>
 			</table>

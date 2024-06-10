@@ -24,6 +24,9 @@ public class DocenteController {
 	@GetMapping
 	public String listDocentesView(Model model) {
 		model.addAttribute("docentes", CollectionDocente.getDocentes());
+		model.addAttribute("response", false);
+		model.addAttribute("msg","");
+		model.addAttribute("title", "docentes");
 		return "docentes";
 	}
 	
@@ -41,9 +44,21 @@ public class DocenteController {
 	
 	
 	@PostMapping("/edit")
-	public String editDocente(@ModelAttribute Docente docente) {
-		CollectionDocente.editDocente(docente);
-		return "redirect:/docentes";
+	public String editDocente(@ModelAttribute Docente docente, Model model) {
+		boolean response = false;
+		String msg = "";
+		try {
+			CollectionDocente.editDocente(docente);
+			msg = "El docente con legajo "+docente.getLegajo()+" fue modificado con éxito";
+			response = true;
+		} catch(Exception e) {
+			msg = e.getMessage();
+			e.printStackTrace();
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("response", response);
+		model.addAttribute("docentes", CollectionDocente.getDocentes());
+		return "docentes";
 	}
 	
 	
@@ -58,11 +73,18 @@ public class DocenteController {
 	}
 	
 	@PostMapping("/create")
-	public ModelAndView createDocente(@ModelAttribute Docente docente) {
-		ModelAndView modelView = new ModelAndView("docentes");
-		CollectionDocente.saveDocente(docente);
-		modelView.addObject("docentes", CollectionDocente.getDocentes());
-		return modelView;
+	public String createDocente(@ModelAttribute Docente docente, Model model) {
+		boolean response = CollectionDocente.saveDocente(docente);
+		String msg;
+		if (response) {
+			msg = "¡Docente agregado con éxito!";
+		} else {
+			msg = "¡Ocurrió un problema! :(";
+		}
+		model.addAttribute("response", response);
+		model.addAttribute("msg", msg);
+		model.addAttribute("docentes", CollectionDocente.getDocentes());
+		return "docentes";
 	}
 	
 	

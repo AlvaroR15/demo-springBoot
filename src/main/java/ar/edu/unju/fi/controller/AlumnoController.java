@@ -27,6 +27,8 @@ public class AlumnoController {
 	public String getAlumnosView(Model model) {
 		model.addAttribute("alumnos", CollectionAlumno.getAlumnos());
 		model.addAttribute("title", "alumnos");
+		model.addAttribute("response", false);
+		model.addAttribute("msg", "");
 		return "alumnos";
 	}
 	
@@ -48,17 +50,36 @@ public class AlumnoController {
 	
 	
 	@PostMapping("/create")
-	public ModelAndView createAlumno(@ModelAttribute Alumno nuevoAlumno, Model model) {
-		ModelAndView modelView = new ModelAndView("alumnos");
-		CollectionAlumno.saveAlumno(nuevoAlumno);
-		modelView.addObject("alumnos", CollectionAlumno.getAlumnos());
-		return modelView;
+	public String createAlumno(@ModelAttribute Alumno nuevoAlumno, Model model) {
+		boolean response = CollectionAlumno.saveAlumno(nuevoAlumno);
+		String msg;
+		if (response) {
+			msg = "Alumno agregado con éxito!";
+		} else {
+			msg = "¡Ocurrió un problema! :(";
+		}
+		model.addAttribute("response", response);
+		model.addAttribute("msg", msg);
+		model.addAttribute("alumnos", CollectionAlumno.getAlumnos());
+		return "alumnos";
 	}
 	
 	@PostMapping("/edit")
 	public String editAlumno(@ModelAttribute Alumno alumno, Model model) {
-		CollectionAlumno.editAlumno(alumno);
-		return "redirect:/alumnos";
+		boolean response = false;
+		String msg = "";
+		try {
+			CollectionAlumno.editAlumno(alumno);
+			msg = "El alumno con DNI "+alumno.getDni()+" fue modificado con éxito";
+			response = true;
+		} catch(Exception e) {
+			msg = e.getMessage();
+			e.printStackTrace();
+		}
+		model.addAttribute("msg", msg);
+		model.addAttribute("response", response);
+		model.addAttribute("alumnos", CollectionAlumno.getAlumnos());
+		return "alumnos";
 	}
 	
 	@GetMapping("/delete/{dni}")
