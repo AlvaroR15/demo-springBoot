@@ -25,12 +25,12 @@ public class MateriaController {
 	@Autowired
     private MateriaMapper materiaMapper;
     
-    @Autowired
+  /*  @Autowired
     private Docente docente;
     
     @Autowired
     private Carrera carrera;
-	
+	*/
 	
 	@GetMapping
 	public String getMateriasView(Model model) {
