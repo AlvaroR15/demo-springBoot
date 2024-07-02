@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unju.fi.collections.CollectionCarrera;
 import ar.edu.unju.fi.collections.CollectionDocente;
 import ar.edu.unju.fi.collections.CollectionMateria;
+import ar.edu.unju.fi.dto.MateriaDTO;
+import ar.edu.unju.fi.mapper.MateriaMapper;
 import ar.edu.unju.fi.model.Carrera;
 import ar.edu.unju.fi.model.Docente;
 import ar.edu.unju.fi.model.Materia;
@@ -21,22 +23,26 @@ import ar.edu.unju.fi.model.Materia;
 @RequestMapping("/materias")
 public class MateriaController {
 	@Autowired
-	private Materia materia;
-	private Docente docente;
-	private Carrera carrera;
+    private MateriaMapper materiaMapper;
+    
+    @Autowired
+    private Docente docente;
+    
+    @Autowired
+    private Carrera carrera;
 	
 	
 	@GetMapping
 	public String getMateriasView(Model model) {
 		model.addAttribute("title", "Materias");
-		model.addAttribute("materias", CollectionMateria.getMaterias());
+		model.addAttribute("materias", materiaMapper.toMateriaDTOs(CollectionMateria.getMaterias()));
 		model.addAttribute("response", false);
 		model.addAttribute("msg", "");
 		return "materias";
 	}
 	
 	@GetMapping("/create")
-	public String createMateriaView(Materia nuevaMateria, Model model) {
+	public String createMateriaView(MateriaDTO nuevaMateria, Model model) {
 		model.addAttribute("titleForm", "Crear materia");
 		model.addAttribute("action", "create");
 		model.addAttribute("docentes", CollectionDocente.getDocentes());
@@ -46,8 +52,10 @@ public class MateriaController {
 	
 	@GetMapping("/edit/{codigo}")
 	public String editMateriaView(@PathVariable String codigo, Model model) {
+		Materia materia = CollectionMateria.getMateria(codigo);
+        MateriaDTO materiaDTO = materiaMapper.toMateriaDTO(materia);
 		model.addAttribute("titleForm", "Editar materia");
-		model.addAttribute("materia", CollectionMateria.getMateria(codigo));
+		model.addAttribute("materia", materiaDTO);
 		model.addAttribute("docentes", CollectionDocente.getDocentes());
 		model.addAttribute("carreras", CollectionCarrera.getCarreras());
 		model.addAttribute("action", "edit");
@@ -56,7 +64,8 @@ public class MateriaController {
 	
 	
 	@PostMapping("/create")
-	public String createMateria(@ModelAttribute Materia nuevaMateria, Model model) {
+	public String createMateria(@ModelAttribute MateriaDTO nuevaMateriaDTO, Model model) {
+		Materia nuevaMateria = materiaMapper.toMateria(nuevaMateriaDTO);
 		Docente docente = CollectionDocente.getDocente(nuevaMateria.getDocente().getLegajo());
 		Carrera carrera = CollectionCarrera.getCarrera(nuevaMateria.getCarrera().getCodigo());
 		nuevaMateria.setDocente(docente);
@@ -70,12 +79,13 @@ public class MateriaController {
 		}
 		model.addAttribute("response", response);
 		model.addAttribute("msg", msg);
-		model.addAttribute("materias", CollectionMateria.getMaterias());
+		model.addAttribute("materias", materiaMapper.toMateriaDTOs(CollectionMateria.getMaterias()));
 		return "materias";
 	}
 	
 	@PostMapping("/edit")
-	public String editMateria(@ModelAttribute Materia materia, Model model) {
+	public String editMateria(@ModelAttribute MateriaDTO materiaDTO, Model model) {
+		Materia materia = materiaMapper.toMateria(materiaDTO);
 		Docente docente = CollectionDocente.getDocente(materia.getDocente().getLegajo());
 		Carrera carrera = CollectionCarrera.getCarrera(materia.getCarrera().getCodigo());
 		materia.setDocente(docente);
