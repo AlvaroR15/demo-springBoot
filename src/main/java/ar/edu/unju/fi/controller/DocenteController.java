@@ -68,7 +68,7 @@ public class DocenteController {
 	
 	
 	@GetMapping("/create")
-	public String createDocenteView(Docente nuevoDocente,Model model) {
+	public String createDocenteView(DocenteDTO docenteDTO,Model model) {
 		String action = "create";
 		model.addAttribute("action", action);
 		model.addAttribute("titleForm", "Crear docente");
