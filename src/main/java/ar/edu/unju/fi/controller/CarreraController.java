@@ -11,11 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.collections.CollectionCarrera;
+import ar.edu.unju.fi.dto.CarreraDTO;
 import ar.edu.unju.fi.model.Carrera;
+import ar.edu.unju.fi.services.ICarreraService;
 
 @Controller
 @RequestMapping("/carreras")
 public class CarreraController {
+	
+	@Autowired
+	private CarreraDTO carreraDTO;
+	
+	@Autowired ICarreraService carreraService;
+	
 	@Autowired
 	private Carrera carrera;
 	
@@ -26,7 +34,7 @@ public class CarreraController {
 	 */
 	@GetMapping
 	public String getCarrerasView(Model model) {
-		model.addAttribute("carreras", CollectionCarrera.getCarreras());
+		model.addAttribute("carreras", carreraService.getCarreras());
 		model.addAttribute("title", "carreras");
 		model.addAttribute("response", false);
 		model.addAttribute("msg", "");
@@ -49,9 +57,9 @@ public class CarreraController {
 	}
 	
 	@PostMapping("/create")
-	public String createCarrera(@ModelAttribute("carrera") Carrera carrera, Model model) {
+	public String createCarrera(@ModelAttribute("carrera") CarreraDTO carreraDTO, Model model) {
 		carrera.setEstado("Activa");		
-		boolean response = CollectionCarrera.saveCarrera(carrera);
+		boolean response = carreraService.saveCarrera(carreraDTO);
 		String msg;
 		if (response) {
 			msg = "¡Carrera agregada con éxito!";
@@ -60,7 +68,7 @@ public class CarreraController {
 		}
 		model.addAttribute("response", response);
 		model.addAttribute("msg", msg);
-		model.addAttribute("carreras", CollectionCarrera.getCarreras());
+		model.addAttribute("carreras", carreraService.getCarreras());
 		return "carreras";
 	}
 	
@@ -73,7 +81,7 @@ public class CarreraController {
 	 */
 	@GetMapping("/delete/{codigo}")
 	public String deleteCarrera(@PathVariable Integer codigo) {
-		CollectionCarrera.deleteCarrera(codigo);
+		carreraService.deleteCarrera(codigo);
 		return "redirect:/carreras";
 	}
 	
@@ -88,9 +96,8 @@ public class CarreraController {
 	 */
 	@GetMapping("/edit/{codigo}")
 	public String editCarreraView(Model model, @PathVariable(value="codigo")Integer codigo) {
-		Carrera carreraEncontrada = new Carrera();
 		String action = "edit";
-		carreraEncontrada = CollectionCarrera.getCarrera(codigo);
+		CarreraDTO carreraEncontrada = carreraService.findById(codigo);
 		model.addAttribute("titleForm", "Editar Carrera");
 		model.addAttribute("action", action);
 		model.addAttribute("carrera", carreraEncontrada);
@@ -98,11 +105,11 @@ public class CarreraController {
 	}
 	
 	@PostMapping("/edit")
-	public String editCarrera(@ModelAttribute("carrera")Carrera carrera, Model model) {
+	public String editCarrera(@ModelAttribute("carrera")CarreraDTO carreraDTO, Model model) {
 		boolean response = false;
 		String msg = "";
 		try {
-			CollectionCarrera.editCarrera(carrera);
+			carreraService.editCarrera(carreraDTO);
 			msg = "La carrera con código "+carrera.getCodigo()+" fue modificada con éxito";
 			response = true;
 		} catch(Exception e) {
@@ -111,7 +118,7 @@ public class CarreraController {
 		}
 		model.addAttribute("msg", msg);
 		model.addAttribute("response", response);
-		model.addAttribute("carreras", CollectionCarrera.getCarreras());
+		model.addAttribute("carreras", carreraService.getCarreras());
 		return "carreras";
 	}
 	
