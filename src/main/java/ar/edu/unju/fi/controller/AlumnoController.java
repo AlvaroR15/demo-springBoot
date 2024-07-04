@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import ar.edu.unju.fi.collections.CollectionAlumno;
+import ar.edu.unju.fi.dto.AlumnoDTO;
+import ar.edu.unju.fi.services.IAlumnoService;
 import ar.edu.unju.fi.model.Alumno;
 
 @Controller
@@ -20,12 +20,15 @@ import ar.edu.unju.fi.model.Alumno;
 public class AlumnoController {
 
 	@Autowired
-	private Alumno alumno;
+	private AlumnoDTO alumnoDTO;
+	
+	@Autowired
+	private IAlumnoService alumnoService;
 	
 	
 	@GetMapping
-	public String getAlumnosView(Model model) {
-		model.addAttribute("alumnos", CollectionAlumno.getAlumnos());
+	public String listAlumnosView(Model model) {
+		model.addAttribute("alumnos", alumnoService.findAll());
 		model.addAttribute("title", "alumnos");
 		model.addAttribute("response", false);
 		model.addAttribute("msg", "");
@@ -34,7 +37,7 @@ public class AlumnoController {
 	
 
 	@GetMapping("/create")
-	public String createAlumnoView(Alumno nuevoAlumno, Model model) {
+	public String createAlumnoView(AlumnoDTO docenteDTO,Model model) {
 		model.addAttribute("action", "create");
 		model.addAttribute("titleForm", "Nuevo Alumno");
 		return "alumno";
@@ -42,16 +45,17 @@ public class AlumnoController {
 	
 	@GetMapping("/edit/{dni}")
 	public String editAlumnoView(@PathVariable String dni, Model model) {
+		AlumnoDTO alumnoEncontradoDTO = alumnoService.findById(dni);
 		model.addAttribute("action", "edit");
 		model.addAttribute("titleForm", "Editar Alumno");
-		model.addAttribute("alumno", CollectionAlumno.getAlumno(dni));
+		model.addAttribute("alumno", alumnoEncontradoDTO);
 		return "alumno";
 	}
 	
 	
 	@PostMapping("/create")
-	public String createAlumno(@ModelAttribute Alumno nuevoAlumno, Model model) {
-		boolean response = CollectionAlumno.saveAlumno(nuevoAlumno);
+	public String createAlumno(@ModelAttribute AlumnoDTO alumnoDTO, Model model) {
+		boolean response = alumnoService.save(alumnoDTO);
 		String msg;
 		if (response) {
 			msg = "Alumno agregado con éxito!";
@@ -60,17 +64,17 @@ public class AlumnoController {
 		}
 		model.addAttribute("response", response);
 		model.addAttribute("msg", msg);
-		model.addAttribute("alumnos", CollectionAlumno.getAlumnos());
+		model.addAttribute("alumno", alumnoService.findAll());
 		return "alumnos";
 	}
 	
 	@PostMapping("/edit")
-	public String editAlumno(@ModelAttribute Alumno alumno, Model model) {
+	public String editAlumno(@ModelAttribute AlumnoDTO alumnoDTO, Model model) {
 		boolean response = false;
 		String msg = "";
 		try {
-			CollectionAlumno.editAlumno(alumno);
-			msg = "El alumno con DNI "+alumno.getDni()+" fue modificado con éxito";
+			alumnoService.edit(alumnoDTO);
+			msg = "El alumno con el dni "+alumnoDTO.getDni()+" fue modificado con éxito";
 			response = true;
 		} catch(Exception e) {
 			msg = e.getMessage();
@@ -78,13 +82,13 @@ public class AlumnoController {
 		}
 		model.addAttribute("msg", msg);
 		model.addAttribute("response", response);
-		model.addAttribute("alumnos", CollectionAlumno.getAlumnos());
+		model.addAttribute("alumnos", alumnoService.findAll());
 		return "alumnos";
 	}
 	
 	@GetMapping("/delete/{dni}")
 	public String deleteAlumno(@PathVariable String dni) {
-		CollectionAlumno.deleteAlumno(dni);
+		alumnoService.deleteById(dni);
 		return "redirect:/alumnos";
 	}
 	
