@@ -105,21 +105,21 @@ public class CarreraController {
 	}
 	
 	@PostMapping("/edit")
-	public String editCarrera(@ModelAttribute("carrera")CarreraDTO carreraDTO, Model model) {
-		boolean response = false;
-		String msg = "";
-		try {
-			carreraService.editCarrera(carreraDTO);
-			msg = "La carrera con código "+carrera.getCodigo()+" fue modificada con éxito";
-			response = true;
-		} catch(Exception e) {
-			msg = e.getMessage();
-			e.printStackTrace();
-		}
-		model.addAttribute("msg", msg);
-		model.addAttribute("response", response);
-		model.addAttribute("carreras", carreraService.getCarreras());
-		return "carreras";
+	public String editCarrera(@ModelAttribute("carrera") CarreraDTO carreraDTO, Model model) {
+	    boolean response = false;
+	    String msg = "";
+	    try {
+	        carreraService.editCarrera(carreraDTO, carreraDTO.getCodigo());
+	        msg = "La carrera con código " + carreraDTO.getCodigo() + " fue modificada con éxito";
+	        response = true;
+	    } catch(Exception e) {
+	        msg = e.getMessage();
+	        e.printStackTrace();
+	    }
+	    model.addAttribute("msg", msg);
+	    model.addAttribute("response", response);
+	    model.addAttribute("carreras", carreraService.getCarreras());
+	    return "carreras";
 	}
 	
 }

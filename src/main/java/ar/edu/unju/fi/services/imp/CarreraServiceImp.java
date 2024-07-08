@@ -36,11 +36,15 @@ public class CarreraServiceImp implements ICarreraService {
 
 	@Override
 	public void editCarrera(CarreraDTO carreraDTO, Integer id) throws Exception {
-		Carrera carreraEncontrada = CollectionCarrera.getCarrera(id);
-		if(carreraEncontrada != null) {
-			CollectionCarrera.editCarrera(carreraMapper.toCarrera(carreraDTO));
-		}
-		
+	    Carrera carreraEncontrada = CollectionCarrera.getCarrera(id);
+	    if (carreraEncontrada != null) {
+	        carreraEncontrada.setNombre(carreraDTO.getNombre());
+	        carreraEncontrada.setCantidadDeAnios(carreraDTO.getCantidadDeAnios());
+	        carreraEncontrada.setEstado(carreraDTO.getEstado());
+	        CollectionCarrera.editCarrera(carreraEncontrada);
+	    } else {
+	        throw new Exception("Carrera no encontrada con ID: " + id);
+	    }
 	}
 
 	@Override
