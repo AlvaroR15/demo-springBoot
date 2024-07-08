@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.collections.CollectionAlumno;
-import ar.edu.unju.fi.collections.CollectionDocente;
 import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.mapper.AlumnoMapper;
 import ar.edu.unju.fi.model.Alumno;
@@ -29,8 +28,8 @@ public class AlumnoServiceImp implements IAlumnoService {
 
 	@Override
 	public AlumnoDTO findById(String dni) {
-		AlumnoDTO alumnoDTO = alumnoMapper.toAlumnoDTO(CollectionAlumno.getAlumno(dni));
-		return alumnoDTO;
+	    AlumnoDTO alumnoDTO = alumnoMapper.toAlumnoDTO(CollectionAlumno.getAlumno(dni));
+	    return alumnoDTO;
 	}
 
 	@Override

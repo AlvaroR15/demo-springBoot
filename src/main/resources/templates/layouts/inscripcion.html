@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head data-th-replace="~{/layouts/header :: head}"></head>
+<body>
+    <header data-th-replace="~{/layouts/header :: header}"></header>
+    
+    <h2 class="text-center my-4">Inscripción de Alumno en Materia</h2>
+    <div class="container-sm">
+        <form action="/inscripcion/inscribir" method="post" class="w-50 m-auto my-5 p-3 border border-dark">
+            <div class="mb-3">
+                <label for="alumnoId" class="form-label">Seleccionar Alumno</label>
+                <select id="alumnoId" name="alumnoId" class="form-control" required>
+                    <option value="" selected>Seleccione un alumno</option>
+                    
+                    <option th:each="alumno : ${alumnos}" th:value="${alumno.id}" th:text="${alumno.nombre}"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="materiaId" class="form-label">Seleccionar Materia</label>
+                <select id="materiaId" name="materiaId" class="form-control" required>
+                    <option value="" selected>Seleccione una materia</option>
+                    
+                    <option th:each="materia : ${materias}" th:value="${materia.id}" th:text="${materia.nombre}"></option>
+                </select>
+            </div>
+            <div class="d-flex justify-content-center py-3 my-2">
+                <input type="submit" value="Inscribir" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+    
+    <footer data-th-replace="~{/layouts/footer :: footer}"></footer>
+</body>
+</html>
