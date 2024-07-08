@@ -11,11 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MateriaDTO {
+	private Long id;  // Cambiar el tipo de String a Long
     private String codigo;
     private String nombre;
     private String curso;
     private float cantidadHoras;
     private String modalidad;
-//    private DocenteDTO docente; 
-//    private CarreraDTO carrera;
+    private DocenteDTO docente; 
+    private CarreraDTO carrera;
 }

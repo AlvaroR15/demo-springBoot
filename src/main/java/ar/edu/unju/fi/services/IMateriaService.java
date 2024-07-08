@@ -5,13 +5,9 @@ import java.util.List;
 import ar.edu.unju.fi.dto.MateriaDTO;
 
 public interface IMateriaService {
-	List<MateriaDTO> findAll();
-	
-	MateriaDTO findById(String codigo);
-	
-	boolean save(MateriaDTO materiaDTO);
-	
-	void deleteById(String codigo);
-	
-	void edit(MateriaDTO materiaDTO) throws Exception;
+    List<MateriaDTO> findAll();
+    MateriaDTO findById(Long id);
+    boolean save(MateriaDTO materiaDTO);
+    void deleteById(Long id);
+    void edit(MateriaDTO materiaDTO) throws Exception;
 }
