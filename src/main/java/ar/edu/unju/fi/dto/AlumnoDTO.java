@@ -10,15 +10,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-	public class AlumnoDTO {
-		public class Alumno {
-			private String dni;
-			private String nombre;
-			private String apellido;
-			private String email;
-			private String telefono;
-			private LocalDate fechaNacimiento;
-			private String domicilio;
-			private String lu; //
-		}
-	}		
+public class AlumnoDTO {
+		private String dni;
+		private String nombre;
+		private String apellido;
+		private String email;
+		private String telefono;
+		private LocalDate fechaNacimiento;
+		private String domicilio;
+}		
