@@ -10,10 +10,11 @@
 				<span style="font-size: 1.2rem;" data-th-text="${msg}"></span>
 				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
-			<div class="alert alert-danger w-50 my-4 m-auto" role="alert" th:if="${!response && msg != ''}">
-				<span style="font-size: 1.2rem;" data-th-text="${msg}"></span>
-				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			<div class="alert alert-danger w-50 my-4 m-auto" role="alert" th:if="${!response and msg != ''}">
+			    <span style="font-size: 1.2rem;" th:text="${msg}"></span>
+			    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
+
 		</div>
 		<div class="container-sm py-5 border my-3">
 			<table class="table">

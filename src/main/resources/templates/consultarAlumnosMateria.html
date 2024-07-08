@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head data-th-replace="~{/layouts/header :: head}"></head>
+
+<body>
+	   <header data-th-replace="~{/layouts/header :: header}"></header>
+
+    <div class="container">
+        <h1>Consulta de Alumnos por Materia</h1>
+        
+        <!-- Formulario para seleccionar la materia -->
+        <form th:action="@{/alumnos/consultar-por-materia/resultados}" method="post" th:object="${materiaId}">
+            <div class="form-group">
+                <label for="materia">Seleccione una materia:</label>
+                <select id="materia" name="materiaId" class="form-control" required>
+                    <option value="" selected>Seleccione una materia</option>
+                    <option th:each="materia : ${materias}" th:value="${materia.id}" th:text="${materia.nombre}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Consultar</button>
+        </form>
+        
+        <!-- Tabla de alumnos -->
+        <div th:if="${alumnos}">
+            <h2>Alumnos de la Materia: <span th:text="${materia.nombre}"></span></h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>DNI</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Fecha de Nacimiento</th>
+                        <th>Domicilio</th>
+                        <th>LU</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="alumno : ${alumnos}">
+                        <td th:text="${alumno.dni}"></td>
+                        <td th:text="${alumno.nombre}"></td>
+                        <td th:text="${alumno.apellido}"></td>
+                        <td th:text="${alumno.email}"></td>
+                        <td th:text="${alumno.telefono}"></td>
+                        <td th:text="${alumno.fechaNacimiento}"></td>
+                        <td th:text="${alumno.domicilio}"></td>
+                        <td th:text="${alumno.lu}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

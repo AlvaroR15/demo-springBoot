@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DocenteDTO {
+	private Integer id;
 	private String legajo;
 	private String nombre;
 	private String apellido;

@@ -16,7 +16,7 @@ public interface AlumnoMapper {
     @InheritInverseConfiguration
     Alumno toAlumno(AlumnoDTO alumnoDTO);
 
-    List<AlumnoDTO> toMateriaDTOs(List<Alumno> alumnos);
+    List<AlumnoDTO> toAlumnoDTOs(List<Alumno> alumnos);
 
-    List<Alumno> toMaterias(List<AlumnoDTO> AlumnoDTOs);
+    List<Alumno> toAlumnos(List<AlumnoDTO> AlumnoDTOs);
 }

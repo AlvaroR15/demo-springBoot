@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 	public class AlumnoDTO {
-		public class Alumno {
+			private Integer id;
 			private String dni;
 			private String nombre;
 			private String apellido;
@@ -19,6 +19,5 @@ import lombok.NoArgsConstructor;
 			private String telefono;
 			private LocalDate fechaNacimiento;
 			private String domicilio;
-			private String lu; //
-		}
+			private String lu; 
 	}		

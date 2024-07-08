@@ -4,7 +4,13 @@
 	<body>
 		<header data-th-replace="~{/layouts/header :: header}"></header>
 		
-		<div class="d-flex justify-content-center my-5"><a class="btn btn-success" data-th-href="@{/alumnos/create}" role="button">Nuevo Alumno</a></div>
+		<div class="d-flex justify-content-around my-5">
+			<a class="btn btn-success" data-th-href="@{/alumnos/create}" role="button">Nuevo Alumno</a>
+			<a class="btn btn-primary" data-th-href="@{/alumnos/inscribir}" role="button">Inscribir a materia</a>
+			<a class="btn btn-secondary" data-th-href="@{/alumnos/consultar-por-materia}" role="button">Ver alumnos de una materia</a>
+			<a class="btn btn-light" data-th-href="@{/alumnos/consultar-por-carrera}" role="button">Ver alumnos de una carrera</a>
+
+		</div>
 		<div class="container-sm py-5 border my-3">
 			<table class="table">
 			  <thead>
@@ -29,8 +35,8 @@
 			      <td data-th-text="${alumno.fechaNacimiento}"></td>
 			      <td data-th-text="${alumno.domicilio}"></td>
 			      <td data-th-text="${alumno.lu}"></td>
-				  <td><button th:data-codAlumno="${alumno.dni}" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Eliminar</button></td>
-				  <td><a data-th-href="@{/alumnos/edit/}+${alumno.dni}" role="button" class="btn btn-warning">Editar</a></td>
+				  <td><button th:data-codAlumno="${alumno.id}" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Eliminar</button></td>
+				  <td><a data-th-href="@{/alumnos/edit/}+${alumno.id}" role="button" class="btn btn-warning">Editar</a></td>
 
 			    </tr>
 			  </tbody>

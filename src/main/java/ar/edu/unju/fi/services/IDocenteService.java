@@ -5,13 +5,13 @@ import java.util.List;
 import ar.edu.unju.fi.dto.DocenteDTO;
 
 public interface IDocenteService {
-	List<DocenteDTO> findAll();
+	List<DocenteDTO> getDocentes();
 	
-	DocenteDTO findById(String legajo);
+	DocenteDTO getDocenteById(Integer id);
 	
-	boolean save(DocenteDTO docenteDTO);
+	boolean saveDocente(DocenteDTO docenteDTO);
 	
-	void deleteById(String legajo);
+	void deleteDocente(Integer id);
 	
-	void edit(DocenteDTO docenteDTO) throws Exception;
+	void editDocente(DocenteDTO docenteDTO) throws Exception;
 }

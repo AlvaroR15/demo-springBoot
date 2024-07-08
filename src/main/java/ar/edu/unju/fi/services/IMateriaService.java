@@ -5,13 +5,13 @@ import java.util.List;
 import ar.edu.unju.fi.dto.MateriaDTO;
 
 public interface IMateriaService {
-	List<MateriaDTO> findAll();
+	public List<MateriaDTO> getMaterias();
 	
-	MateriaDTO findById(String codigo);
+	public MateriaDTO getMateriaById(Integer id);
 	
-	boolean save(MateriaDTO materiaDTO);
+	public boolean saveMateria(MateriaDTO materiaDTO);
 	
-	void deleteById(String codigo);
+	public void deleteMateria(Integer id);
 	
-	void edit(MateriaDTO materiaDTO) throws Exception;
+	public void editMateria(MateriaDTO materiaDTO) throws Exception;
 }

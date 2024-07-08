@@ -3,15 +3,24 @@ package ar.edu.unju.fi.services;
 import java.util.List;
 
 import ar.edu.unju.fi.dto.AlumnoDTO;
+import ar.edu.unju.fi.model.Alumno;
 
 public interface IAlumnoService {
-	List<AlumnoDTO> findAll();
+	public List<AlumnoDTO> getAlumnos();
 	
-	AlumnoDTO findById(String dni);
+	public AlumnoDTO getAlumnoById(Integer id);
 	
-	boolean save(AlumnoDTO alumnoDTO);
+	public boolean saveAlumno(AlumnoDTO alumnoDTO);
 	
-	void deleteById(String dni);
+	public void deleteAlumno(Integer id);
 	
-	void edit(AlumnoDTO alumnoDTO) throws Exception;
+	public void editAlumno(AlumnoDTO alumnoDTO) throws Exception;
+
+	void inscribirAlumnoEnMateria(Integer alumnoId, Integer materiaId) throws Exception;
+
+	public List<AlumnoDTO> getAlumnosPorCarrera(Integer carreraId);
+	
+    List<Alumno> getAlumnosPorMateria(Integer materiaId);
+
+	
 }

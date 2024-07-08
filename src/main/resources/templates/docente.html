@@ -7,36 +7,48 @@
 		
 		<h2 class="text-center my-4" data-th-text="${titleForm}"></h2>
 		<div class="container-sm">
-			<form data-th-action="${action == 'create'}? @{/docentes/create} : @{/docentes/edit}"  th:object="${docente}" class="w-50 m-auto my-5 p-3 border border-dark" method="post">
-				<div class="mb-3">
-				  <label for="legajo" class="form-label">Legajo</label>
-				  <input type="text" th:class="'form-control ' + ${action == 'edit' ? 'opacity-75' : ''}"
-				   id="legajo"
-				   name="legajo"
-				   th:field="*{legajo}"
-				   th:readonly="${action == 'edit'}">
-				</div>
-				<div class="mb-3">
-				  <label for="nombre" class="form-label">Nombre</label>
-				  <input type="text" class="form-control" id="nombre" th:field="*{nombre}">
-				</div>
-				<div class="mb-3">
-				  <label for="apellido" class="form-label">Apellido</label>
-				  <input type="text" class="form-control" id="apellido" th:field="*{apellido}">
-				</div>
-				<div class="mb-3">
-				  <label for="email" class="form-label">Email</label>
-				  <input type="text" class="form-control" id="email" th:field="*{email}">
-				</div>
-				<div class="mb-3">
-				  <label for="telefono" class="form-label">Teléfono</label>
-				  <input type="text" class="form-control" id="telefono" th:field="*{telefono}">
-				</div>
-				
-				<div class="d-flex justify-content-center py-3 my-2">
-					<input type="submit" th:value="Hacer" class="btn btn-primary">
-				</div>
-			</form>			
+			<form data-th-action="${action == 'create'} ? @{/docentes/create} : @{/docentes/edit}" th:object="${docente}" class="w-50 m-auto my-5 p-3 border border-dark" method="post">
+			    <div class="mb-3">
+			        <div data-th-if="${action == 'edit'}">
+			            <input type="hidden" th:field="*{id}">
+			        </div>
+			        <label for="legajo" class="form-label">Legajo</label>
+			        <input type="text" class="form-control" id="legajo" name="legajo"
+			               th:field="*{legajo}"
+			               th:attr="readonly=${action == 'edit'}"
+			               th:classappend="${action == 'edit'} ? 'opacity-75' : ''">
+			        <p class="form-text text-danger" th:if="${#fields.hasErrors('legajo')}" th:errors="*{legajo}"></p>
+			    </div>
+			    <div class="mb-3">
+			        <label for="nombre" class="form-label">Nombre</label>
+			        <input type="text" class="form-control" id="nombre" th:field="*{nombre}"
+			               th:class="'form-control ' + ${#fields.hasErrors('nombre')} ? 'is-invalid' : ''">
+			        <p class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
+			    </div>
+			    <div class="mb-3">
+			        <label for="apellido" class="form-label">Apellido</label>
+			        <input type="text" class="form-control" id="apellido" th:field="*{apellido}"
+			               th:class="'form-control ' + ${#fields.hasErrors('apellido')} ? 'is-invalid' : ''">
+			        <p class="form-text text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></p>
+			    </div>
+			    <div class="mb-3">
+			        <label for="email" class="form-label">Email</label>
+			        <input type="text" class="form-control" id="email" th:field="*{email}"
+			               th:class="'form-control ' + ${#fields.hasErrors('email')} ? 'is-invalid' : ''">
+			        <p class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+			    </div>
+			    <div class="mb-3">
+			        <label for="telefono" class="form-label">Teléfono</label>
+			        <input type="text" class="form-control" id="telefono" th:field="*{telefono}"
+			               th:class="'form-control ' + ${#fields.hasErrors('telefono')} ? 'is-invalid' : ''">
+			        <p class="form-text text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></p>
+			    </div>
+			    <div class="d-flex justify-content-center py-3 my-2">
+			        <input type="submit" th:value="Hacer" class="btn btn-primary">
+			    </div>
+			</form>
+
+			
 		</div>
 		
 		<footer data-th-replace="~{/layouts/footer :: footer}"></footer>

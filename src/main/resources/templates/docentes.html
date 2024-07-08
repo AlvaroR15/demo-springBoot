@@ -24,8 +24,8 @@
 			      <td data-th-text="${docente.email}"></td>
 	  		      <td data-th-text="${docente.telefono}"></td>
 
-				  <td><button th:data-codDocente="${docente.legajo}" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Eliminar</button></td>
-				  <td><a  role="button" class="btn btn-warning" data-th-href="@{/docentes/edit/}+${docente.legajo}">Editar</a></td>
+				  <td><button th:data-codDocente="${docente.id}" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Eliminar</button></td>
+				  <td><a  role="button" class="btn btn-warning" data-th-href="@{/docentes/edit/}+${docente.id}">Editar</a></td>
 			    </tr>
 			  </tbody>
 			</table>

@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CarreraDTO {
+	private Integer id;
 	private Integer codigo;
 	private String nombre;
 	private Byte cantidadDeAnios;
