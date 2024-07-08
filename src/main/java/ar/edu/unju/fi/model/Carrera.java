@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -42,5 +43,24 @@ public class Carrera {
 	
 	 @OneToMany(mappedBy = "carrera", cascade = CascadeType.ALL, orphanRemoval = true)
 	    private List<Materia> materias;
+	 
+	    // Constructor adicional para inicializar las colecciones
+	    public Carrera(String nombre, Byte cantidadDeAnios, String estado) {
+	        this.nombre = nombre;
+	        this.cantidadDeAnios = cantidadDeAnios;
+	        this.estado = estado;
+	        this.alumnos = new ArrayList<>();
+	        this.materias = new ArrayList<>();
+	    }
+
+	    // Constructor adicional con código
+	    public Carrera(Integer codigo, String nombre, Byte cantidadDeAnios, String estado) {
+	        this.codigo = codigo;
+	        this.nombre = nombre;
+	        this.cantidadDeAnios = cantidadDeAnios;
+	        this.estado = estado;
+	        this.alumnos = new ArrayList<>();
+	        this.materias = new ArrayList<>();
+	    }
 	
 }

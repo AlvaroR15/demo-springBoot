@@ -1,4 +1,5 @@
 package ar.edu.unju.fi.services.imp;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import ar.edu.unju.fi.collections.CollectionAlumno;
 import ar.edu.unju.fi.collections.CollectionDocente;
 import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.mapper.AlumnoMapper;
+import ar.edu.unju.fi.model.Alumno;
 import ar.edu.unju.fi.services.IAlumnoService;
 
 @Service
@@ -17,8 +19,12 @@ public class AlumnoServiceImp implements IAlumnoService {
 
 	@Override
 	public List<AlumnoDTO> findAll() {
-		List<AlumnoDTO> alumnosDTO = alumnoMapper.toAlumnoDTO(CollectionAlumno.getAlumnos());
-		return alumnosDTO;
+	    List<Alumno> alumnos = CollectionAlumno.getAlumnos();
+	    List<AlumnoDTO> alumnosDTO = new ArrayList<>();
+	    for (Alumno alumno : alumnos) {
+	        alumnosDTO.add(alumnoMapper.toAlumnoDTO(alumno));
+	    }
+	    return alumnosDTO;
 	}
 
 	@Override

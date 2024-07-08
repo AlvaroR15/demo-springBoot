@@ -39,4 +39,14 @@ public class Materia {
         inverseJoinColumns = @JoinColumn(name = "alumno_id")
     )
     private Set<Alumno> alumnos = new HashSet<>();
+    
+    public Materia(String codigo, String nombre, String curso, float cantidadHoras, String modalidad, Docente docente, Carrera carrera) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.curso = curso;
+        this.cantidadHoras = cantidadHoras;
+        this.modalidad = modalidad;
+        this.docente = docente;
+        this.carrera = carrera;
+    }
 }

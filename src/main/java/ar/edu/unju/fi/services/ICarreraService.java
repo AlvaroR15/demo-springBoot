@@ -9,6 +9,6 @@ public interface ICarreraService {
 		public List<CarreraDTO> getCarreras();
 		public CarreraDTO findById(Integer id);
 		public boolean saveCarrera(CarreraDTO carreraDTO);
-		public void editCarrera(CarreraDTO carreraDTO) throws Exception;
+		void editCarrera(CarreraDTO carreraDTO, Integer id) throws Exception;
 		public void deleteCarrera(Integer id);
 }

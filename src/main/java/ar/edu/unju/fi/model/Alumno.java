@@ -33,4 +33,15 @@ public class Alumno {
     @ManyToOne
     @JoinColumn(name = "carrera_id")
     private Carrera carrera;
+    
+    public Alumno(String dni, String nombre, String apellido, String email, String telefono, LocalDate fechaNacimiento, String domicilio, String lu) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+        this.telefono = telefono;
+        this.fechaNacimiento = fechaNacimiento;
+        this.domicilio = domicilio;
+        this.lu = lu;
+    }
 }
