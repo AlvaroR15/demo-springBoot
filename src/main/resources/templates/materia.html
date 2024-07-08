@@ -15,18 +15,25 @@
 		    <div class="mb-3">
 		        <label for="codigo" class="form-label">Código</label>
 		        <input type="text" th:class="'form-control ' + ${action == 'edit' ? 'opacity-75' : ''}" id="codigo" name="codigo" th:field="*{codigo}" th:readonly="${action == 'edit'}">
+				   <small class="text-danger" th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}"></small>
 		    </div>
 		    <div class="mb-3">
 		        <label for="nombre" class="form-label">Nombre</label>
 		        <input type="text" class="form-control" id="nombre" th:field="*{nombre}">
+			   <small class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+
 		    </div>
 		    <div class="mb-3">
 		        <label for="curso" class="form-label">Curso</label>
 		        <input type="text" class="form-control" id="curso" th:field="*{curso}">
+			   <small class="text-danger" th:if="${#fields.hasErrors('curso')}" th:errors="*{curso}"></small>
+
 		    </div>
 		    <div class="mb-3">
-		        <label for="cantidadHoras" class="form-label">Cantidad</label>
+		        <label for="cantidadHoras" class="form-label">Cantidad de hs</label>
 		        <input type="number" class="form-control" id="cantidadHoras" th:field="*{cantidadHoras}">
+			   <small class="text-danger" th:if="${#fields.hasErrors('cantidadHoras')}" th:errors="*{cantidadHoras}"></small>
+
 		    </div>
 		    <div class="mb-3">
 		        <div class="form-check">

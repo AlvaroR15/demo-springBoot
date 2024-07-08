@@ -89,6 +89,7 @@ public class AlumnoServiceImp implements IAlumnoService {
 	                      .collect(Collectors.toList());
 	    }
 
+
 	    @Override
 	    @Transactional
 	    public void inscribirAlumnoEnMateria(Integer alumnoId, Integer materiaId) throws Exception {

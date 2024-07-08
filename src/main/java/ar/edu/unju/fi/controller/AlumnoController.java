@@ -155,22 +155,21 @@ public class AlumnoController {
 	 * @param model
 	 * @return
 	 */
-    @GetMapping("/consultar-por-carrera")
-    public String consultaPorCarreraView(Model model) {
-        List<CarreraDTO> carreras = carreraService.getCarreras();
-        model.addAttribute("carreras", carreras);
-        return "consultarAlumnosCarrera";
-    }
+	@GetMapping("/consultar-por-carrera")
+	public String consultaPorCarreraView(Model model) {
+	    List<CarreraDTO> carreras = carreraService.getCarreras();
+	    model.addAttribute("carreras", carreras);
+	    return "consultarAlumnosCarrera";
+	}
 
-    @PostMapping("/consultar-por-carrera/resultados")
-    public String getAlumnosPorCarrera(@ModelAttribute CarreraDTO carreraDTO, Model model) {
-        List<AlumnoDTO> alumnos = alumnoService.getAlumnosPorCarrera(carreraDTO.getId());
-        model.addAttribute("alumnos", alumnos);
-        model.addAttribute("carreras", carreraService.getCarreras());
-        System.out.println("ALUMNOS ENCONTRADOS::::: "+ alumnos);
-        return "consultarAlumnosCarrera";
-    }
-
+	@PostMapping("/consultar-por-carrera/resultados")
+	public String getAlumnosPorCarrera(@RequestParam("carreraId") Integer carreraId, Model model) {
+	    List<AlumnoDTO> alumnos = alumnoService.getAlumnosPorCarrera(carreraId);
+	    model.addAttribute("alumnos", alumnos);
+	    model.addAttribute("carreras", carreraService.getCarreras());
+	    System.out.println("ALUMNOS ENCONTRADOS::::: " + alumnos);
+	    return "consultarAlumnosCarrera";
+	}
 
 
 	

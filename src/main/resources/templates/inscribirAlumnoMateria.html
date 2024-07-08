@@ -5,26 +5,30 @@
 <body>
     <header data-th-replace="~{/layouts/header :: header}"></header>
 
-    <h1>Inscripción de Alumno en Materia</h1>
-    <form th:action="@{/alumnos/inscribir}" method="post">
-        <div class="mb-3">
-            <label for="alumno">Seleccione un alumno:</label>
-            <select id="alumno" name="alumnoId" required>
-                <option value="" selected>Seleccione un alumno</option>
-                <option th:each="alumno : ${alumnos}" th:value="${alumno.id}" th:text="${alumno.nombre} + ' ' + ${alumno.apellido}"></option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="materia">Seleccione una materia:</label>
-            <select id="materia" name="materiaId" required>
-                <option value="" selected>Seleccione una materia</option>
-                <option th:each="materia : ${materias}" th:value="${materia.id}" th:text="${materia.nombre}"></option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <input type="submit" value="Inscribir Alumno">
-        </div>
-    </form>
+   <div class="container">
+	        <div class="form-container mt-5">
+	            <h1 class="form-title">Inscripción de Alumno en Materia</h1>
+	            <form th:action="@{/alumnos/inscribir}" method="post">
+	                <div class="form-group">
+	                    <label for="alumno" class="form-label">Seleccione un alumno:</label>
+	                    <select id="alumno" name="alumnoId" class="form-control form-select" required>
+	                        <option value="" selected>Seleccione un alumno</option>
+	                        <option th:each="alumno : ${alumnos}" th:value="${alumno.id}" th:text="${alumno.nombre} + ' ' + ${alumno.apellido}"></option>
+	                    </select>
+	                </div>
+	                <div class="form-group">
+	                    <label for="materia" class="form-label">Seleccione una materia:</label>
+	                    <select id="materia" name="materiaId" class="form-control form-select" required>
+	                        <option value="" selected>Seleccione una materia</option>
+	                        <option th:each="materia : ${materias}" th:value="${materia.id}" th:text="${materia.nombre}"></option>
+	                    </select>
+	                </div>
+	                <div class="form-group text-center mt-4">
+	                    <input type="submit" value="Inscribir Alumno" class="btn btn-primary">
+	                </div>
+	            </form>
+	        </div>
+	    </div>
 
 </body>
 </html>
