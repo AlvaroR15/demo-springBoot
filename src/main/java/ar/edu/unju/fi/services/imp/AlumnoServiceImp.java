@@ -11,7 +11,7 @@ import ar.edu.unju.fi.mapper.AlumnoMapper;
 import ar.edu.unju.fi.services.IAlumnoService;
 
 @Service
-public class AlumnoServiceImp {
+public class AlumnoServiceImp implements IAlumnoService {
 	@Autowired
 	private AlumnoMapper alumnoMapper;
 
