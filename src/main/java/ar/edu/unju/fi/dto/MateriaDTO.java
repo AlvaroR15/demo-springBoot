@@ -14,11 +14,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MateriaDTO {
-	private Integer id;
-
-    @NotBlank(message = "El código de la materia no puede estar vacío")
-    @Size(max = 50, message = "El código de la materia no puede tener más de 50 caracteres")
-    private String codigo;
+	
+	
+	private Integer codigo;
 
     @NotBlank(message = "El nombre de la materia no puede estar vacío")
     @Size(max = 100, message = "El nombre de la materia no puede tener más de 100 caracteres")
@@ -32,7 +30,6 @@ public class MateriaDTO {
     private Float cantidadHoras;
 
     @NotBlank(message = "La modalidad de la materia no puede estar vacía")
-    @Size(max = 50, message = "La modalidad de la materia no puede tener más de 50 caracteres")
     private String modalidad;
 
     private DocenteDTO docente; 

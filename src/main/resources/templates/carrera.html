@@ -8,28 +8,35 @@
 		<h2 class="text-center my-4" data-th-text="${titleForm}"></h2>
 		<div class="container-sm">
 			<form th:action="${action == 'create'} ? @{/carreras/create} : @{/carreras/edit}" th:object="${carrera}" class="w-50 m-auto my-5 p-3 border border-dark" method="post">
-			        <div th:if="${titleForm == 'Editar Carrera'}">
-			            <input type="hidden" th:field="*{codigo}" />
-			        </div>
-			        <div class="mb-3">
-			            <label for="nombre" class="form-label">Nombre</label>
-			            <input type="text" class="form-control" id="nombre" th:field="*{nombre}" placeholder="Ingrese nombre" th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ''">
-			            <p class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
-			        </div>
-			        <div class="mb-3">
-			            <label for="cantidadDeAnios" class="form-label">Cantidad de Años</label>
-			            <input type="number" class="form-control" id="cantidadDeAnios" th:field="*{cantidadDeAnios}" placeholder="Ingrese cantidad de años" th:classappend="${#fields.hasErrors('cantidadDeAnios')} ? 'is-invalid' : ''">
-			            <p class="form-text text-danger" th:if="${#fields.hasErrors('cantidadDeAnios')}" th:errors="*{cantidadDeAnios}"></p>
-			        </div>
-			        <div th:if="${titleForm == 'Editar Carrera'}" class="mb-3">
-			            <label for="estado" class="form-label">Estado</label>
-			            <input type="text" class="form-control" id="estado" th:field="*{estado}" placeholder="Ingrese estado" th:classappend="${#fields.hasErrors('estado')} ? 'is-invalid' : ''">
-			            <p class="form-text text-danger" th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}"></p>
-			        </div>
-			        <div class="d-flex justify-content-center py-3 my-2">
-			            <button type="submit" class="btn btn-primary">Hacer</button>
-			        </div>
-			    </form>
+				<div th:if="${titleForm == 'Editar Carrera'}">
+					<input type="hidden" th:field="*{codigo}" />
+				</div>
+				<div class="mb-3">
+					<label for="nombre" class="form-label">Nombre</label>
+					<input type="text" class="form-control" id="nombre" th:field="*{nombre}" placeholder="Ingrese nombre" th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ''">
+					<p class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
+				</div>
+				<div class="mb-3">
+					<label for="cantidadDeAnios" class="form-label">Cantidad de Años</label>
+					<input type="number" class="form-control" id="cantidadDeAnios" th:field="*{cantidadDeAnios}" placeholder="Ingrese cantidad de años" th:classappend="${#fields.hasErrors('cantidadDeAnios')} ? 'is-invalid' : ''">
+					<p class="form-text text-danger" th:if="${#fields.hasErrors('cantidadDeAnios')}" th:errors="*{cantidadDeAnios}"></p>
+				</div>
+				<div class="mb-3" data-th-if="${action == 'edit'}">
+					<div class="form-check">
+						<input class="form-check-input" type="radio" id="activa" name="estado" value="true" th:field="*{estado}">
+					 	<label class="form-check-label" for="activa">Activa</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" id="inactiva" name="estado" value="false" th:field="*{estado}">
+						<label class="form-check-label" for="inactiva">Inactiva</label>
+					</div>
+				</div>
+				
+				
+				<div class="d-flex justify-content-center py-3 my-2">
+					<button type="submit" class="btn btn-primary">Hacer</button>
+				</div>
+			</form>
 		
 		</div>
 

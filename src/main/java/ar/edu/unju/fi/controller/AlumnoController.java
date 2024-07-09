@@ -25,12 +25,7 @@ import ar.edu.unju.fi.model.Alumno;
 @Controller
 @RequestMapping("/alumnos")
 public class AlumnoController {
-	
-
-
-	@Autowired
-	private AlumnoDTO alumnoDTO;
-	
+		
 	@Autowired
 	private IAlumnoService alumnoService;
 	
@@ -56,11 +51,11 @@ public class AlumnoController {
 
 	@GetMapping("/create")
 	public String createAlumnoView(Model model) {
-		AlumnoDTO alumnoDTO = new AlumnoDTO();
-		model.addAttribute("action", "create");
-		model.addAttribute("titleForm", "Nuevo Alumno");
-		model.addAttribute("alumno", alumnoDTO);
-		return "alumno";
+	    AlumnoDTO alumnoDTO = new AlumnoDTO();
+	    model.addAttribute("action", "create");
+	    model.addAttribute("titleForm", "Nuevo Alumno");
+	    model.addAttribute("alumno", alumnoDTO);
+	    return "alumno";
 	}
 	
 	@GetMapping("/edit/{id}")
@@ -72,23 +67,44 @@ public class AlumnoController {
 	    return "alumno";
 	}
 	
-	
+	/**
+	 * Crear alumno
+	 * @param alumnoDTO
+	 * @param result
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("/create")
-	public String createAlumno(@ModelAttribute AlumnoDTO alumnoDTO, Model model) {
-		boolean response = alumnoService.saveAlumno(alumnoDTO);
-		String msg = response ? "¡Alumno agregado con éxito!" : "¡Ocurrió un problema! :(";
-		model.addAttribute("response", response);
-		model.addAttribute("msg", msg);
-		model.addAttribute("alumnos", alumnoService.getAlumnos());
-		return "alumnos";
+	public String createAlumno(@Valid @ModelAttribute("alumno") AlumnoDTO alumnoDTO, BindingResult result, Model model) {
+	    if (result.hasErrors()) {
+	        model.addAttribute("action", "create");
+	        model.addAttribute("alumno", alumnoDTO);
+	        model.addAttribute("titleForm", "Crear alumno");
+	        return "alumno";
+	    }
+	    boolean response = alumnoService.saveAlumno(alumnoDTO);
+	    String msg = response ? "¡Alumno agregado con éxito!" : "¡Ocurrió un problema! :(";
+	    model.addAttribute("response", response);
+	    model.addAttribute("msg", msg);
+	    model.addAttribute("alumnos", alumnoService.getAlumnos());
+	    return "alumnos";
 	}
 	
+	
+	/**
+	 * Editar datos del alumno
+	 * @param alumnoDTO
+	 * @param bindingResult
+	 * @param model
+	 * @return
+	 */
 	@PostMapping("/edit")
 	public String editAlumno(@Valid @ModelAttribute("alumno") AlumnoDTO alumnoDTO,
 	                         BindingResult bindingResult,
 	                         Model model) {
 	    if (bindingResult.hasErrors()) {
 	        model.addAttribute("action", "edit");
+	        model.addAttribute("alumno", alumnoDTO);
 	        model.addAttribute("titleForm", "Editar Alumno");
 	        return "alumno";
 	    }
@@ -109,6 +125,12 @@ public class AlumnoController {
 	    return "alumnos";
 	}
 	
+	
+	/**
+	 * Borrar alumno
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/delete/{id}")
 	public String deleteAlumno(@PathVariable Integer id) {
 		alumnoService.deleteAlumno(id);
@@ -163,8 +185,8 @@ public class AlumnoController {
 	}
 
 	@PostMapping("/consultar-por-carrera/resultados")
-	public String getAlumnosPorCarrera(@RequestParam("carreraId") Integer carreraId, Model model) {
-	    List<AlumnoDTO> alumnos = alumnoService.getAlumnosPorCarrera(carreraId);
+	public String getAlumnosPorCarrera(@RequestParam Integer carreraCodigo, Model model) {
+	    List<AlumnoDTO> alumnos = alumnoService.getAlumnosPorCarrera(carreraCodigo);
 	    model.addAttribute("alumnos", alumnos);
 	    model.addAttribute("carreras", carreraService.getCarreras());
 	    System.out.println("ALUMNOS ENCONTRADOS::::: " + alumnos);

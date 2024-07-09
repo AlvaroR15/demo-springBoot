@@ -29,7 +29,7 @@ class DocenteTest {
 	
 	@Test
 	public void crearDocenteTest() {
-		Docente docente = new Docente("LEG1005","Elizabeth","García","lizgarcia@fca.unju.edu.ar","388-5412998", materiaRepository.findById(6).get());
+		Docente docente = new Docente("LEG1002","Rodolfo","Aguado","profAguado@fca.unju.edu.ar","388-6453245", materiaRepository.findById(3).get());
 		Docente docenteGuardado = docenteRepository.save(docente);
 		assertTrue(docenteGuardado instanceof Docente);
 	}

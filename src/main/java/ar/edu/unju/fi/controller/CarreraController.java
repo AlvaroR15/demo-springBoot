@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,9 +46,7 @@ public class CarreraController {
     }
 
     @PostMapping("/create")
-    public String createCarrera(@Valid @ModelAttribute("carrera") CarreraDTO carreraDTO,
-                                BindingResult result,
-                                ModelMap model) {
+     public String createCarrera(@Valid @ModelAttribute("carrera") CarreraDTO carreraDTO,BindingResult result,ModelMap model) {
         if (result.hasErrors()) {
             model.addAttribute("titleForm", "Nueva Carrera");
             model.addAttribute("action", "create");
@@ -58,7 +57,6 @@ public class CarreraController {
         }
 
         try {
-            carreraDTO.setEstado("Activa");
             boolean response = carreraService.saveCarrera(carreraDTO);
             String msg = response ? "¡Carrera agregada con éxito!" : "¡Ocurrió un problema! :(";
             model.addAttribute("msg", msg);
@@ -72,6 +70,8 @@ public class CarreraController {
         }
         return "carreras";
     }
+
+
 
     @GetMapping("/delete/{codigo}")
     public String deleteCarrera(@PathVariable Integer codigo) {

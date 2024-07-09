@@ -27,13 +27,13 @@
                     <td th:text="${materia.curso}"></td>
                     <td th:text="${materia.cantidadHoras}"></td>
                     <td th:text="${materia.modalidad}"></td>
-                    <td th:text="${materia?.docente?.nombre}"></td>
+					<td th:text="${materia.docente?.nombre ?: '-'}"></td>
                     <td th:text="${materia?.carrera?.nombre}"></td>
                     <td>
-                        <button th:data-codMateria="${materia.id}" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Eliminar</button>
+                        <button th:data-codMateria="${materia.codigo}" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Eliminar</button>
                     </td>
                     <td>
-                        <a th:href="@{/materias/edit/{id}(id=${materia.id})}" role="button" class="btn btn-warning">Editar</a>
+                        <a th:href="@{/materias/edit/{codigo}(codigo=${materia.codigo})}" role="button" class="btn btn-warning">Editar</a>
                     </td>
                 </tr>
             </tbody>

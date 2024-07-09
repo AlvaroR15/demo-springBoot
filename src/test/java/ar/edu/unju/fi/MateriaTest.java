@@ -28,13 +28,12 @@ class MateriaTest {
 	
 	@Test
 	public void crearMateriaTest() {
-		Carrera carrera = carreraRepository.findById(3).get();
+		Carrera carrera = carreraRepository.findById(2).get();
 		Materia materia = new Materia();
-		materia.setNombre("Diseño Experimental");
-		//materia.setCantidadHoras(4);
-		materia.setCurso("26");
-		materia.setCodigo("LB1");
-		materia.setModalidad("Virtual");
+		materia.setNombre("Zoologia Alimentaria");
+		materia.setCantidadHoras((float)6);
+		materia.setCurso("10");
+		materia.setModalidad("Presencial");
 		materia.setCarrera(carrera);
 		materiaRepository.save(materia);
 	}

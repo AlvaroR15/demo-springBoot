@@ -42,7 +42,6 @@ public class MateriaController {
 	public String getMateriasView(Model model) {
 		model.addAttribute("title", "Materias");
 		model.addAttribute("materias", materiaService.getMaterias());
-		System.out.println("LISTA MATERIAS: "+materiaService.getMaterias());
 		model.addAttribute("response", false);
 		model.addAttribute("msg", "");
 		return "materias";
@@ -76,7 +75,7 @@ public class MateriaController {
 	    String msg = "";
 	    try {
 	        materiaService.editMateria(materiaDTO);
-	        msg = "La materia con código " + materiaDTO.getCodigo() + " fue modificada con éxito";
+	        msg = "La materia con código fue modificada con éxito";
 	        response = true;
 	    } catch (Exception e) {
 	        msg = e.getMessage();
@@ -89,9 +88,9 @@ public class MateriaController {
 	}
 
 
-	@GetMapping("/edit/{id}")
-	public String editMateriaView(@PathVariable Integer id, Model model) {
-	    MateriaDTO materiaEncontradaDTO = materiaService.getMateriaById(id);
+	@GetMapping("/edit/{codigo}")
+	public String editMateriaView(@PathVariable Integer codigo, Model model) {
+	    MateriaDTO materiaEncontradaDTO = materiaService.getMateriaById(codigo);
 	    model.addAttribute("action", "edit");
 	    model.addAttribute("titleForm", "Editar Materia");
 	    model.addAttribute("materia", materiaEncontradaDTO);
@@ -119,12 +118,12 @@ public class MateriaController {
 	    model.addAttribute("response", response);
 	    model.addAttribute("msg", msg);
 	    model.addAttribute("materias", materiaService.getMaterias());
-	    return "materias";
+	    return "redirect:/materias";
 	}
 
-	@GetMapping("/delete/{id}")
-	public String deleteMateria(@PathVariable Integer id) {
-	    materiaService.deleteMateria(id);
+	@GetMapping("/delete/{codigo}")
+	public String deleteMateria(@PathVariable Integer codigo) {
+	    materiaService.deleteMateria(codigo);
 	    return "redirect:/materias";
 	}
 

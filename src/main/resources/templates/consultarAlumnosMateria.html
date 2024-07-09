@@ -14,7 +14,7 @@
                 <label for="materia">Seleccione una materia:</label>
                 <select id="materia" name="materiaId" class="form-control" required>
                     <option value="" selected>Seleccione una materia</option>
-                    <option th:each="materia : ${materias}" th:value="${materia.id}" th:text="${materia.nombre}"></option>
+                    <option th:each="materia : ${materias}" th:value="${materia.codigo}" th:text="${materia.nombre}"></option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Consultar</button>

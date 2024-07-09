@@ -78,9 +78,9 @@ public class AlumnoServiceImp implements IAlumnoService {
 	    }
 
 	    @Override
-	    public List<AlumnoDTO> getAlumnosPorCarrera(Integer carreraId) {
-	        logger.info("Buscando alumnos por carrera con ID: {}", carreraId);
-	        List<Alumno> alumnos = alumnoRepository.getCarreraById(carreraId);
+	    public List<AlumnoDTO> getAlumnosPorCarrera(Integer carreraCodigo) {
+	        logger.info("Buscando alumnos por carrera con código: {}", carreraCodigo);
+	        List<Alumno> alumnos = alumnoRepository.getCarreraById(carreraCodigo);
 	        return alumnos.stream()
 	                      .map(alumno -> new AlumnoDTO(
 	                          alumno.getId(), alumno.getDni(), alumno.getNombre(), alumno.getApellido(), 
@@ -106,7 +106,7 @@ public class AlumnoServiceImp implements IAlumnoService {
 	    @Override
 	    public List<Alumno> getAlumnosPorMateria(Integer materiaId) {
 	        logger.info("buscando alumnos por materia con ID: {}", materiaId);
-	        return alumnoRepository.findByMateriasId(materiaId);
+	        return alumnoRepository.findByMateriasCodigo(materiaId);
 	    }
 	
 }

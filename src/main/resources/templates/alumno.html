@@ -7,55 +7,55 @@
 		
 		<h2 class="text-center my-4" data-th-text="${titleForm}"></h2>
 		<div class="container-sm">
-			<form data-th-action="${action == 'create'} ? @{/alumnos/create} : @{/alumnos/edit}" th:object="${alumno}" class="w-50 m-auto my-5 p-3 border border-dark" method="post">
-			    <div class="mb-3">
-			        <input type="hidden" th:field="*{id}">
-			        <label for="dni" class="form-label">DNI</label>
-			        <input type="text" class="form-control" id="dni" name="dni" th:field="*{dni}" th:class="'form-control ' + ${#fields.hasErrors('dni')} ? 'is-invalid' : ''">
-			        <p class="form-text text-danger" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></p>
-			    </div>
-			    <div class="mb-3">
-			        <label for="nombre" class="form-label">Nombre</label>
-			        <input type="text" class="form-control" id="nombre" th:field="*{nombre}" th:class="'form-control ' + ${#fields.hasErrors('nombre')} ? 'is-invalid' : ''">
-			        <p class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
-			    </div>
-			    <div class="mb-3">
-			        <label for="apellido" class="form-label">Apellido</label>
-			        <input type="text" class="form-control" id="apellido" th:field="*{apellido}" th:class="'form-control ' + ${#fields.hasErrors('apellido')} ? 'is-invalid' : ''">
-			        <p class="form-text text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></p>
-			    </div>
-			    <div class="mb-3">
-			        <label for="email" class="form-label">Email</label>
-			        <input type="text" class="form-control" id="email" th:field="*{email}" th:class="'form-control ' + ${#fields.hasErrors('email')} ? 'is-invalid' : ''">
-			        <p class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
-			    </div>
-			    <div class="mb-3">
-			        <label for="telefono" class="form-label">Teléfono</label>
-			        <input type="text" class="form-control" id="telefono" th:field="*{telefono}" th:class="'form-control ' + ${#fields.hasErrors('telefono')} ? 'is-invalid' : ''">
-			        <p class="form-text text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></p>
-			    </div>
-			    <div class="mb-3">
-			        <label for="domicilio" class="form-label">Domicilio</label>
-			        <input type="text" class="form-control" id="domicilio" th:field="*{domicilio}" th:class="'form-control ' + ${#fields.hasErrors('domicilio')} ? 'is-invalid' : ''">
-			        <p class="form-text text-danger" th:if="${#fields.hasErrors('domicilio')}" th:errors="*{domicilio}"></p>
-			    </div>
-			    <div class="mb-3">
-			        <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
-			        <input type="date" class="form-control" id="fechaNacimiento" th:field="*{fechaNacimiento}" th:class="'form-control ' + ${#fields.hasErrors('fechaNacimiento')} ? 'is-invalid' : ''">
-			        <p class="form-text text-danger" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></p>
-			    </div>
-			    <div class="mb-3">
-			        <label for="lu" class="form-label">LU</label>
-			        <input type="text" class="form-control" id="lu" th:field="*{lu}" th:class="'form-control ' + ${#fields.hasErrors('lu')} ? 'is-invalid' : ''" th:readonly="${action == 'edit'}">
-			        <p class="form-text text-danger" th:if="${#fields.hasErrors('lu')}" th:errors="*{lu}"></p>
-			    </div>
-			    <div class="d-flex justify-content-center py-3 my-2">
-			        <input type="submit" th:value="Hacer" class="btn btn-primary">
-			    </div>
-			</form>
-
-		
+		    <form th:action="${action == 'create'} ? @{/alumnos/create} : @{/alumnos/edit}" th:object="${alumno}" class="w-50 m-auto my-5 p-3 border border-dark" method="post">
+		        <div class="mb-3">
+		            <input type="hidden" th:field="*{id}">
+		            <label for="dni" class="form-label">DNI</label>
+		            <input type="text" class="form-control" id="dni" name="dni" th:field="*{dni}" th:classappend="${#fields.hasErrors('dni')} ? ' is-invalid' : ''">
+		            <p class="form-text text-danger" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></p>
+		        </div>
+		        <div class="mb-3">
+		            <label for="nombre" class="form-label">Nombre</label>
+		            <input type="text" class="form-control" id="nombre" th:field="*{nombre}" th:classappend="${#fields.hasErrors('nombre')} ? ' is-invalid' : ''">
+		            <p class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>
+		        </div>
+		        <div class="mb-3">
+		            <label for="apellido" class="form-label">Apellido</label>
+		            <input type="text" class="form-control" id="apellido" th:field="*{apellido}" th:classappend="${#fields.hasErrors('apellido')} ? ' is-invalid' : ''">
+		            <p class="form-text text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></p>
+		        </div>
+		        <div class="mb-3">
+		            <label for="email" class="form-label">Email</label>
+		            <input type="text" class="form-control" id="email" th:field="*{email}" th:classappend="${#fields.hasErrors('email')} ? ' is-invalid' : ''">
+		            <p class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+		        </div>
+		        <div class="mb-3">
+		            <label for="telefono" class="form-label">Teléfono</label>
+		            <input type="text" class="form-control" id="telefono" th:field="*{telefono}" th:classappend="${#fields.hasErrors('telefono')} ? ' is-invalid' : ''">
+		            <p class="form-text text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></p>
+		        </div>
+		        <div class="mb-3">
+		            <label for="domicilio" class="form-label">Domicilio</label>
+		            <input type="text" class="form-control" id="domicilio" th:field="*{domicilio}" th:classappend="${#fields.hasErrors('domicilio')} ? ' is-invalid' : ''">
+		            <p class="form-text text-danger" th:if="${#fields.hasErrors('domicilio')}" th:errors="*{domicilio}"></p>
+		        </div>
+		        <div class="mb-3">
+		            <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
+		            <input type="date" class="form-control" id="fechaNacimiento" th:field="*{fechaNacimiento}" th:classappend="${#fields.hasErrors('fechaNacimiento')} ? ' is-invalid' : ''">
+		            <p class="form-text text-danger" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></p>
+		        </div>
+		        <div class="mb-3">
+		            <label for="lu" class="form-label">LU</label>
+		            <input type="text" class="form-control" id="lu" th:field="*{lu}" th:classappend="${#fields.hasErrors('lu')} ? ' is-invalid' : ''" th:readonly="${action == 'edit'}">
+		            <p class="form-text text-danger" th:if="${#fields.hasErrors('lu')}" th:errors="*{lu}"></p>
+		        </div>
+		        <div class="d-flex justify-content-center py-3 my-2">
+		            <input type="submit" th:value="${action == 'create'} ? 'Crear' : 'Actualizar'" class="btn btn-primary">
+		        </div>
+		    </form>
 		</div>
+
+
 		
 		<footer data-th-replace="~{/layouts/footer :: footer}"></footer>
 	</body>

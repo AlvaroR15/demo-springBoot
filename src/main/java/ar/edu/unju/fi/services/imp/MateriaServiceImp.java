@@ -63,10 +63,9 @@ public class MateriaServiceImp implements IMateriaService {
     @Override
     public void editMateria(MateriaDTO materiaDTO) throws Exception {
         logger.info("Editando materia: {}", materiaDTO);
-        Optional<Materia> materiaEncontrada = materiaRepository.findById(materiaDTO.getId());
+        Optional<Materia> materiaEncontrada = materiaRepository.findById(materiaDTO.getCodigo());
         if (materiaEncontrada.isPresent()) {
             Materia materiaToEdit = materiaEncontrada.get();
-            materiaToEdit.setCodigo(materiaDTO.getCodigo());
             materiaToEdit.setNombre(materiaDTO.getNombre());
             materiaToEdit.setCurso(materiaDTO.getCurso());
             materiaToEdit.setModalidad(materiaDTO.getModalidad());

@@ -10,12 +10,7 @@
     <div class="container-sm">
 		<form th:action="${action == 'create'} ? @{/materias/create} : @{/materias/edit}" th:object="${materia}" class="w-50 m-auto my-5 p-3 border border-dark" method="post">
 		    <div data-th-if="${action == 'edit'}">
-		        <input type="hidden" th:field="*{id}">
-		    </div>
-		    <div class="mb-3">
-		        <label for="codigo" class="form-label">Código</label>
-		        <input type="text" th:class="'form-control ' + ${action == 'edit' ? 'opacity-75' : ''}" id="codigo" name="codigo" th:field="*{codigo}" th:readonly="${action == 'edit'}">
-				   <small class="text-danger" th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}"></small>
+		        <input type="hidden" th:field="*{codigo}">
 		    </div>
 		    <div class="mb-3">
 		        <label for="nombre" class="form-label">Nombre</label>
@@ -35,16 +30,18 @@
 			   <small class="text-danger" th:if="${#fields.hasErrors('cantidadHoras')}" th:errors="*{cantidadHoras}"></small>
 
 		    </div>
-		    <div class="mb-3">
-		        <div class="form-check">
-		            <input class="form-check-input" type="radio" id="virtual" name="modalidad" value="Virtual" th:field="*{modalidad}">
-		            <label class="form-check-label" for="virtual">Virtual</label>
-		        </div>
-		        <div class="form-check">
-		            <input class="form-check-input" type="radio" id="presencial" name="modalidad" value="Presencial" th:field="*{modalidad}">
-		            <label class="form-check-label" for="presencial">Presencial</label>
-		        </div>
-		    </div>
+			<div class="mb-3">
+			    <div class="form-check">
+			        <input class="form-check-input" type="radio" id="virtual" name="modalidad" value="Virtual" th:field="*{modalidad}">
+			        <label class="form-check-label" for="virtual">Virtual</label>
+			    </div>
+			    <div class="form-check">
+			        <input class="form-check-input" type="radio" id="presencial" name="modalidad" value="Presencial" th:field="*{modalidad}">
+			        <label class="form-check-label" for="presencial">Presencial</label>
+			    </div>
+			    <p class="form-text text-danger" th:if="${#fields.hasErrors('modalidad')}" th:errors="*{modalidad}"></p>
+			</div>
+
 		    <div class="mb-3">
 		        <label for="docente" class="form-label">Docente</label>
 		        <select id="docente" th:field="*{docente.id}" class="form-control" required>

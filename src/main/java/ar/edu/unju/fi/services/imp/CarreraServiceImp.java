@@ -28,11 +28,10 @@ public class CarreraServiceImp implements ICarreraService {
     
     @Override
     public List<CarreraDTO> getCarreras() {
-        logger.info("Buscando todas las carreras...");
-        List<CarreraDTO> carrerasDTO = carreraMapper.toCarreraDTOs(carreraRepository.findAll());
-        return carrerasDTO;
+        logger.info("Buscando todas las carreras disponibles...");
+        return carreraMapper.toCarreraDTOs(carreraRepository.findByEstadoTrue());
     }
-
+    
     @Override
     public CarreraDTO getCarreraById(Integer id) {
         logger.info("Buscando carrera por ID: {}", id);
@@ -41,13 +40,14 @@ public class CarreraServiceImp implements ICarreraService {
     }
 
     @Override
-    public boolean saveCarrera(CarreraDTO carreraDTO) {
-        logger.info("Guardando carrera: {}", carreraDTO);
-        Carrera carrera = carreraMapper.toCarrera(carreraDTO);
-        carrera.setEstado("Activa");
-        carreraRepository.save(carrera);
-        return true;
-    }
+	public boolean saveCarrera(CarreraDTO carreraDTO) {
+    	logger.info("Guardando una nueva carrera");
+		Carrera carrera = carreraMapper.toCarrera(carreraDTO);
+		carrera.setEstado(true);
+		carreraRepository.save(carrera);
+		return true;
+	}
+
 
     @Override
     public void editCarrera(CarreraDTO carreraDTO) throws Exception {
@@ -58,7 +58,7 @@ public class CarreraServiceImp implements ICarreraService {
             // Actualizar los campos necesarios
             existingCarrera.setNombre(carreraDTO.getNombre());
             existingCarrera.setCantidadDeAnios(carreraDTO.getCantidadDeAnios());
-            existingCarrera.setEstado(carreraDTO.getEstado());
+            existingCarrera.setEstado(carreraDTO.isEstado());
             // Guardar la carrera actualizada
             carreraRepository.save(existingCarrera);
             logger.info("Carrera editada correctamente: {}", existingCarrera);
@@ -69,7 +69,19 @@ public class CarreraServiceImp implements ICarreraService {
 
     @Override
     public void deleteCarrera(Integer id) {
-        logger.info("Borrando carrera con ID: {}", id);
-        carreraRepository.deleteById(id);
+        logger.info("Inactivando carrera con ID: {}", id);
+        
+        Optional<Carrera> optionalCarrera = carreraRepository.findById(id);
+        
+        if (optionalCarrera.isPresent()) {
+            Carrera carrera = optionalCarrera.get();
+            carrera.setEstado(false);
+            
+            carreraRepository.save(carrera);
+            
+            logger.info("Carrera inactivada correctamente: {}", carrera);
+        } else {
+            logger.warn("No se encontró ninguna carrera con ID: {}", id);
+        }
     }
 }

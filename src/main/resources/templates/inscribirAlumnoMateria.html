@@ -20,7 +20,7 @@
 	                    <label for="materia" class="form-label">Seleccione una materia:</label>
 	                    <select id="materia" name="materiaId" class="form-control form-select" required>
 	                        <option value="" selected>Seleccione una materia</option>
-	                        <option th:each="materia : ${materias}" th:value="${materia.id}" th:text="${materia.nombre}"></option>
+	                        <option th:each="materia : ${materias}" th:value="${materia.codigo}" th:text="${materia.nombre}"></option>
 	                    </select>
 	                </div>
 	                <div class="form-group text-center mt-4">

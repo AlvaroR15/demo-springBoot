@@ -14,18 +14,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CarreraDTO {
-	private Integer id;
+	
+		
+		private Integer codigo;
 
-    @NotNull(message = "El código de la carrera no puede estar vacío")
-    private Integer codigo;
+	    @NotBlank(message = "El nombre de la carrera no puede estar vacío")
+	    @Size(min = 3, max = 50, message = "El nombre de la carrera debe tener entre {min} y {max} caracteres")
+	    private String nombre;
 
-    @NotBlank(message = "El nombre de la carrera no puede estar vacío")
-    @Size(min = 3, max = 100, message = "El nombre de la carrera debe tener entre {min} y {max} caracteres")
-    private String nombre;
+	    @NotNull(message = "La cantidad de años no puede ser nula")
+	    private Byte cantidadDeAnios;
 
-    @NotNull(message = "La cantidad de años no puede ser nula")
-    private Byte cantidadDeAnios;
-
-    @NotBlank(message = "El estado no puede estar vacío")
-    private String estado;
+	    private boolean estado;
 }
