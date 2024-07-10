@@ -205,10 +205,9 @@ public class AlumnoController {
 	    @PostMapping("/consultar-por-materia")
 	    public String consultarAlumnosPorMateria(@RequestParam("materiaId") Integer materiaId, Model model) {
 	        MateriaDTO materia = materiaService.getMateriaById(materiaId);
-	        List<Alumno> alumnos = alumnoService.getAlumnosPorMateria(materiaId);
-	        List<AlumnoDTO> alumnosDTO = alumnoMapper.toAlumnoDTOs(alumnos);
+	        List<AlumnoDTO> alumnos = alumnoService.getAlumnosPorMateria(materiaId);
 	        model.addAttribute("materia", materia);
-	        model.addAttribute("alumnos", alumnosDTO);
+	        model.addAttribute("alumnos", alumnos);
 	        model.addAttribute("materias", materiaService.getMaterias());
 	        return "consultarAlumnosMateria";
 	    }

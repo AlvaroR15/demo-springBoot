@@ -20,7 +20,7 @@ public interface IAlumnoService {
 
 	public List<AlumnoDTO> getAlumnosPorCarrera(Integer carreraId);
 	
-    List<Alumno> getAlumnosPorMateria(Integer materiaId);
+    List<AlumnoDTO> getAlumnosPorMateria(Integer materiaId);
 
 	
 }
