@@ -184,14 +184,14 @@ public class AlumnoController {
 	    return "consultarAlumnosCarrera";
 	}
 
-	@PostMapping("/consultar-por-carrera/resultados")
-	public String getAlumnosPorCarrera(@RequestParam Integer carreraCodigo, Model model) {
-	    List<AlumnoDTO> alumnos = alumnoService.getAlumnosPorCarrera(carreraCodigo);
-	    model.addAttribute("alumnos", alumnos);
-	    model.addAttribute("carreras", carreraService.getCarreras());
-	    System.out.println("ALUMNOS ENCONTRADOS::::: " + alumnos);
-	    return "consultarAlumnosCarrera";
-	}
+	  @PostMapping("/consultar-por-carrera")
+	    public String getAlumnosPorCarrera(@RequestParam("carreraCodigo") Integer carreraCodigo, Model model) {
+	        List<AlumnoDTO> alumnos = alumnoService.getAlumnosPorCarrera(carreraCodigo);
+	        model.addAttribute("alumnos", alumnos);
+	        model.addAttribute("carreras", carreraService.getCarreras());
+	        System.out.println("ALUMNOS ENCONTRADOS::::: " + alumnos);
+	        return "consultarAlumnosCarrera";
+	    }
 
 
 	

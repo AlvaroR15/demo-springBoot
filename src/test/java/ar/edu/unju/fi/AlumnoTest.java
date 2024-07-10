@@ -31,12 +31,12 @@ class AlumnoTest {
 	
 	@Test
 	public void createAlumnoTest() {
-		Carrera carrera = carreraRepository.findById(2).get();
+		Carrera carrera = carreraRepository.findById(1).get();
 		List<Materia> materias = new ArrayList<>();
-		materias.add(materiaRepository.findById(3).get());
-		materias.add(materiaRepository.findById(4).get());
+		materias.add(materiaRepository.findById(2).get());
+		materias.add(materiaRepository.findById(7).get());
 
-		Alumno alumno = new Alumno("44129234","Álvaro","Ramos","alvaro@gmail.com","388-6812090",LocalDate.of(2002, 03, 15),"B° Los Perales", "LU-630", carrera,materias);
+		Alumno alumno = new Alumno("40123452","Rodrigo","De Paul","motorcito@gmail.com","388-6453557",LocalDate.of(1994,02, 16),"B° Alto Comedero", "LU-269", carrera,materias);
 		Alumno alumnoGuardado = alumnoRepository.save(alumno);
 		assertTrue(alumnoGuardado instanceof Alumno);
 	}

@@ -5,16 +5,17 @@
 	   <header data-th-replace="~{/layouts/header :: header}"></header>
 	   <div class="container">
 	       <h1>Consulta de Alumnos por Carrera</h1>
-	       <form th:action="@{/alumnos/consultar-por-carrera/resultados}" method="post">
-	           <div class="form-group">
-	               <label for="carrera">Seleccione una carrera:</label>
-	               <select id="carrera" name="carreraCodigo" class="form-control" required>
-	                   <option value="" selected>Seleccione una carrera</option>
-	                   <option th:each="carrera : ${carreras}" th:value="${carrera.codigo}" th:text="${carrera.nombre}"></option>
-	               </select>
-	           </div>
-	           <button type="submit" class="btn btn-primary">Consultar</button>
-	       </form>
+		   <form th:action="@{/alumnos/consultar-por-carrera}" method="post">
+		       <div class="form-group">
+		           <label for="carrera">Seleccione una carrera:</label>
+		           <select id="carrera" name="carreraCodigo" class="form-control" required>
+		               <option value="" selected>Seleccione una carrera</option>
+		               <option th:each="carrera : ${carreras}" th:value="${carrera.codigo}" th:text="${carrera.nombre}"></option>
+		           </select>
+		       </div>
+		       <button type="submit" class="btn btn-primary">Consultar</button>
+		   </form>
+
 	       <div th:if="${alumnos}">
 	           <h2>Alumnos de la Carrera</h2>
 	           <table class="table">
