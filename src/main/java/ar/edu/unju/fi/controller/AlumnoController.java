@@ -195,31 +195,22 @@ public class AlumnoController {
 
 
 	
-    @GetMapping("/consultar-por-materia/{materiaId}")
-    public String getAlumnosPorMateria(@PathVariable Integer materiaId, Model model) {
-        MateriaDTO materia = materiaService.getMateriaById(materiaId);
-        List<Alumno> alumnos = alumnoService.getAlumnosPorMateria(materiaId);
-        List<AlumnoDTO> alumnosDTO = alumnoMapper.toAlumnoDTOs(alumnos);
-        model.addAttribute("materia", materia);
-        model.addAttribute("alumnos", alumnosDTO);
-        return "consultarAlumnosMateria";
-    }
+	  @GetMapping("/consultar-por-materia")
+	    public String consultaPorMateriaView(Model model) {
+	        List<MateriaDTO> materias = materiaService.getMaterias();
+	        model.addAttribute("materias", materias);
+	        return "consultarAlumnosMateria";
+	    }
 
-    @PostMapping("/consultar-por-materia/resultados")
-    public String consultarAlumnosPorMateria(@ModelAttribute("materiaId") Integer materiaId, Model model) {
-        MateriaDTO materia = materiaService.getMateriaById(materiaId);
-        List<Alumno> alumnos = alumnoService.getAlumnosPorMateria(materiaId);
-        List<AlumnoDTO> alumnosDTO = alumnoMapper.toAlumnoDTOs(alumnos);
-        model.addAttribute("materia", materia);
-        model.addAttribute("alumnos", alumnosDTO);
-        return "consultarAlumnosMateria";
-    }
-
-    @GetMapping("/consultar-por-materia")
-    public String consultaPorMateriaView(Model model) {
-        List<MateriaDTO> materias = materiaService.getMaterias();
-        model.addAttribute("materias", materias);
-        return "consultarAlumnosMateria";
-    }
+	    @PostMapping("/consultar-por-materia")
+	    public String consultarAlumnosPorMateria(@RequestParam("materiaId") Integer materiaId, Model model) {
+	        MateriaDTO materia = materiaService.getMateriaById(materiaId);
+	        List<Alumno> alumnos = alumnoService.getAlumnosPorMateria(materiaId);
+	        List<AlumnoDTO> alumnosDTO = alumnoMapper.toAlumnoDTOs(alumnos);
+	        model.addAttribute("materia", materia);
+	        model.addAttribute("alumnos", alumnosDTO);
+	        model.addAttribute("materias", materiaService.getMaterias());
+	        return "consultarAlumnosMateria";
+	    }
 
 }

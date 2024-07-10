@@ -4,8 +4,8 @@
 <body>
 	   <header data-th-replace="~{/layouts/header :: header}"></header>
 	   <div class="container">
-	       <h1>Consulta de Alumnos por Carrera</h1>
-		   <form th:action="@{/alumnos/consultar-por-carrera}" method="post">
+	       <h1 class="text-center my-4">Consultar Alumnos por Carrera</h1>
+		   <form th:action="@{/alumnos/consultar-por-carrera}" method="post" class="my-3">
 		       <div class="form-group">
 		           <label for="carrera">Seleccione una carrera:</label>
 		           <select id="carrera" name="carreraCodigo" class="form-control" required>
@@ -13,7 +13,7 @@
 		               <option th:each="carrera : ${carreras}" th:value="${carrera.codigo}" th:text="${carrera.nombre}"></option>
 		           </select>
 		       </div>
-		       <button type="submit" class="btn btn-primary">Consultar</button>
+		       <button type="submit" class="btn btn-primary mt-3">Consultar</button>
 		   </form>
 
 	       <div th:if="${alumnos}">

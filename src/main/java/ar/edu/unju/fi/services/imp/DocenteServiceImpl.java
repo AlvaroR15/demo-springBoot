@@ -40,15 +40,15 @@ public class DocenteServiceImpl implements IDocenteService {
 
     @Override
     public boolean saveDocente(DocenteDTO docenteDTO) {
-        logger.info("Guardando docente: {}", docenteDTO);
         Docente docente = docenteMapper.toDocente(docenteDTO);
         docenteRepository.save(docente);
+        logger.info("Docente guardado correctamente");
         return true;
     }
 
     @Override
     public void deleteDocente(Integer id) {
-        logger.info("Borrando docente con ID: {}", id);
+        logger.warn("Borrando docente con ID: {}", id);
         docenteRepository.deleteById(id);
     }
 
@@ -63,8 +63,9 @@ public class DocenteServiceImpl implements IDocenteService {
             docenteToEdit.setEmail(docenteDTO.getEmail());
             docenteToEdit.setTelefono(docenteDTO.getTelefono());
             docenteRepository.save(docenteToEdit);
-            logger.info("Docente editado correctamente: {}", docenteToEdit);
+            logger.info("Docente editado correctamente");
         } else {
+        	logger.error("Error al editar docente");
             throw new Exception("El docente con el legajo: " + docenteDTO.getLegajo() + " no fue encontrado.");
         }
     }

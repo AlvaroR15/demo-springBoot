@@ -54,7 +54,7 @@ public class AlumnoServiceImp implements IAlumnoService {
 
 	    @Override
 	    public void deleteAlumno(Integer id) {
-	        logger.info("Borrando alumno con ID: {}", id);
+	        logger.warn("Borrando alumno con ID: {}", id);
 	        alumnoRepository.deleteById(id);
 	    }
 
@@ -73,6 +73,7 @@ public class AlumnoServiceImp implements IAlumnoService {
 	            alumnoRepository.save(alumnoToEdit);
 	            logger.info("Alumno editado correctamente: ", alumnoToEdit);
 	        } else {
+	        	logger.error("Error al editar alumno");
 	            throw new Exception("El alumno con el DNI: " + alumnoDTO.getDni() + " no fue encontrado.");
 	        }
 	    }

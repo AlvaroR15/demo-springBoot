@@ -56,7 +56,7 @@ public class MateriaServiceImp implements IMateriaService {
 
     @Override
     public void deleteMateria(Integer id) {
-        logger.info("Borrando materia con ID: {}", id);
+        logger.warn("Borrando materia con ID: {}", id);
         materiaRepository.deleteById(id);
     }
 
@@ -75,6 +75,7 @@ public class MateriaServiceImp implements IMateriaService {
             materiaRepository.save(materiaToEdit);
             logger.info("Materia editada correctamente: {}");
         } else {
+        	logger.error("Error al editar");
             throw new Exception("La materia no fue encontrada.");
         }
     }

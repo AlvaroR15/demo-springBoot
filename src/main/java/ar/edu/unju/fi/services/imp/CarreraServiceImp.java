@@ -41,10 +41,10 @@ public class CarreraServiceImp implements ICarreraService {
 
     @Override
 	public boolean saveCarrera(CarreraDTO carreraDTO) {
-    	logger.info("Guardando una nueva carrera");
 		Carrera carrera = carreraMapper.toCarrera(carreraDTO);
 		carrera.setEstado(true);
 		carreraRepository.save(carrera);
+		logger.info("Guardando una nueva carrera");
 		return true;
 	}
 
@@ -55,13 +55,11 @@ public class CarreraServiceImp implements ICarreraService {
         Optional<Carrera> existingCarreraOpt = carreraRepository.findById(carreraDTO.getCodigo());
         if (existingCarreraOpt.isPresent()) {
             Carrera existingCarrera = existingCarreraOpt.get();
-            // Actualizar los campos necesarios
             existingCarrera.setNombre(carreraDTO.getNombre());
             existingCarrera.setCantidadDeAnios(carreraDTO.getCantidadDeAnios());
             existingCarrera.setEstado(carreraDTO.isEstado());
-            // Guardar la carrera actualizada
             carreraRepository.save(existingCarrera);
-            logger.info("Carrera editada correctamente: {}", existingCarrera);
+            logger.info("Carrera editada correctamente");
         } else {
             throw new Exception("Carrera no encontrada con el ID: " + carreraDTO.getCodigo());
         }
@@ -79,9 +77,9 @@ public class CarreraServiceImp implements ICarreraService {
             
             carreraRepository.save(carrera);
             
-            logger.info("Carrera inactivada correctamente: {}", carrera);
+            logger.warn("Carrera inactivada correctamente: {}", carrera);
         } else {
-            logger.warn("No se encontró ninguna carrera con ID: {}", id);
+            logger.error("No se encontró ninguna carrera con ID: {}", id);
         }
     }
 }
